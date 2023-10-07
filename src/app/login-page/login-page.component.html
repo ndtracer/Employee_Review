@@ -1,0 +1,68 @@
+<body class="body">
+  <header class="header">
+  <h1 class="h1">
+    <div><img src="/assets/images/logo-icon.png" alt="logo"></div>
+    <div>Welcome</div>
+  </h1>
+  </header>
+  <h3 class="logout-h3"></h3>
+  <div></div>
+
+  <div class="loginDiv">
+    <div class="divl"></div>
+      <div class="divmid">
+
+
+       <form [class.submitted]="isFormSubmitted" [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+        <div class="form-group">
+          <p class="login-error-message" *ngIf="invalid"> Invalid username</p>
+
+          <!-- <label for="login-v1">Username</label> -->
+          <input type="text" formControlName="login" name="username" id="login-v1" class="login-form-field" placeholder="Username">
+
+
+        </div>
+
+        <div class="form-group">
+          <p class="login-error-message" *ngIf="invalid"> Invalid password</p>
+          <!-- <label for="password-v1">Password</label> -->
+          <input type="password" formControlName="password" name="password" id="password-v1" class="login-form-field" placeholder="Password">
+        </div>
+
+        <div class="loginBtn">
+         <button type="submit" value="Login" class="login-form-submit" (submit)="onSubmit()">Login</button>
+         <button type="button" class="register-form-submit" (click)="toggleRegister()">New User</button>
+        </div>
+       </form>
+      </div>
+    <div class="divr"></div>
+  </div>
+
+
+</body>
+
+<main class="newUser" *ngIf="newUser">
+  <form [class.submitted]="isFormSubmitted" [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+    <div class="form-group">
+
+      <label for="login-v1">New Username</label>
+      <input type="text" formControlName="login" name="username" id="login-v1" class="login-form-field" placeholder="Username">
+
+
+    </div>
+
+    <div class="form-group">
+
+      <label for="password-v1">New Password</label>
+      <input type="password" formControlName="password" name="password" id="password-v1" class="login-form-field" placeholder="Password">
+    </div>
+
+    <div class="loginBtn">
+
+
+     <button class="login-form-submit" (click)="toggleRegister()">Cancel</button>
+
+     <button type="submit" value="Login" class="login-form-submit" (submit)="ngOnInit()">Submit</button>
+    </div>
+   </form>
+</main>

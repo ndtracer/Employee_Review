@@ -9,7 +9,7 @@
   width: 10vw;
   background: #3a3a3a;
   color: #bababa;
-  font-size: 50%;
+  font-size: .5em;
   text-decoration: none;
   text-transform: uppercase;
   border: transparent;
@@ -18,36 +18,32 @@
   clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%);
 }
 
-
-
 .borderDiv1:hover {
   .navbar-icon {
-    width: 65%;
+    width: 40px;
   };
   .navbarBtn1 {
     background-color: #1a74a3;
-    font-size: 60%;
+    font-size: .6em;
     }
 
 }
 
 .borderDiv2:hover {
   .navbar-icon {
-    width: 65%;
+    width: 40px;
   };
   .navbarBtn2 {
     background-color: #1a74a3;
-    font-size: 60%;
+    font-size: .6em;
     }
 
 }
 
 .navbar-icon {
-  width: 60%;
+  width: 35px;
   transition: .1s;
 }
-
-
 
 .borderDiv1 {
   display: flex;
@@ -64,21 +60,19 @@
   transition: ease-in-out;
 }
 
-
-
 .navbarBtn2 {
   display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
+
+  flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   padding: 15px;
   height: 10vh;
   min-height: 75px;
   width: 10vw;
   background: #3a3a3a;
   color: #bababa;
-  font-size: 50%;
+  font-size: .5em;
   text-decoration: none;
   text-transform: uppercase;
   border: transparent;
@@ -154,7 +148,6 @@ max-width: 100vw;
   margin-right: 10px;
 
 }
-
 
 .body {
   background-color: #1a74a3;
@@ -311,4 +304,9 @@ display: flex;
 
 .logoutBtn:hover {
   background-color: #bababa;
+}
+
+.bottom-space {
+  height: 20px;
+  background-color: #1a74a3;
 }
