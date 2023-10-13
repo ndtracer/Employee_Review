@@ -1,0 +1,75 @@
+<h1>{{title}}</h1>
+<form *ngIf="!loading" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="row">
+<!-- First Name -->
+        <div class="mb-3 col">
+            <label class="form-label">First Name</label>
+            <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }" />
+            <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
+                <div *ngIf="f['firstName'].errors['required']">First Name is required</div>
+            </div>
+        </div>
+
+<!-- Last Name -->
+        <div class="mb-3 col">
+            <label class="form-label">Last Name</label>
+            <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }" />
+            <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+                <div *ngIf="f['lastName'].errors['required']">Last Name is required</div>
+            </div>
+        </div>
+
+<!-- Title -->
+        <div class="mb-3 col">
+          <label class="form-label">Job Title</label>
+          <input type="text" formControlName="jobTitle" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['jobTitle'].errors }" />
+          <div *ngIf="submitted && f['jobTitle'].errors" class="invalid-feedback">
+              <div *ngIf="f['jobTitle'].errors['required']">Job Title is required</div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+    <div class="row">
+        <div class="mb-3 col">
+            <label class="form-label">Department</label>
+            <input type="text" formControlName="department" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['department'].errors }" />
+            <div *ngIf="submitted && f['department'].errors" class="invalid-feedback">
+                <div *ngIf="f['department'].errors['required']">Department is required</div>
+            </div>
+          </div>
+
+
+        <div class="mb-3 col">
+          <label class="form-label">Manager</label>
+          <input type="text" formControlName="manager" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['manager'].errors }" />
+          <div *ngIf="submitted && f['manager'].errors" class="invalid-feedback">
+              <div *ngIf="f['manager'].errors['required']">Manager is required</div>
+          </div>
+        </div>
+
+
+      <div class="mb-3 col">
+        <label class="form-label">Location</label>
+        <input type="text" formControlName="location" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['location'].errors }" />
+        <div *ngIf="submitted && f['location'].errors" class="invalid-feedback">
+            <div *ngIf="f['location'].errors['required']">Location is required</div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="mb-3">
+        <button [disabled]="submitting" class="btn btn-primary">
+            <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
+            Save
+        </button>
+        <a routerLink="/employees" class="btn btn-link">Cancel</a>
+    </div>
+</form>
+<div *ngIf="loading" class="text-center m-5">
+    <span class="spinner-border spinner-border-lg align-center"></span>
+</div>

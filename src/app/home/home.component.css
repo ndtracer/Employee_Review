@@ -1,0 +1,39 @@
+.homeDiv {
+  display: flex;
+  justify-content: center;
+  background-color: #1a74a3;
+}
+
+.container1 {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  width: fit-content;
+  border-radius: 5px;
+  align-items: center;
+  height: fit-content;
+  padding: 0px;
+}
+
+.gradientDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(180deg, #1a74a3 0%,
+   whitesmoke 15%, whitesmoke 85%, #1a74a3 100%);
+  width: fit-content;
+  height: fit-content;
+  padding: 15px;
+}
+
+.h1 {
+  display: flex;
+  justify-content:center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  color: #3a3a3a;
+  font-size: 50px;
+
+}

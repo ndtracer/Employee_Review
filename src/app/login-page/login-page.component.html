@@ -31,6 +31,7 @@
 
         <div class="loginBtn">
          <button type="submit" value="Login" class="login-form-submit" (submit)="onSubmit()">Login</button>
+
          <button type="button" class="register-form-submit" (click)="toggleRegister()">New User</button>
         </div>
        </form>
@@ -42,7 +43,9 @@
 </body>
 
 <main class="newUser" *ngIf="newUser">
-  <form [class.submitted]="isFormSubmitted" [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+  <form
+   [class.submitted]="isFormSubmitted" [formGroup]="loginForm" (ngSubmit)="ngOnInit()"
+   class="login-form">
     <div class="form-group">
 
       <label for="login-v1">New Username</label>
@@ -62,7 +65,7 @@
 
      <button class="login-form-submit" (click)="toggleRegister()">Cancel</button>
 
-     <button type="submit" value="Login" class="login-form-submit" (submit)="ngOnInit()">Submit</button>
+     <button type="submit" value="Login" class="login-form-submit">Submit</button>
     </div>
    </form>
 </main>

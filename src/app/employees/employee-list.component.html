@@ -1,0 +1,56 @@
+<h1>Employees</h1>
+<a routerLink="add" class="btn btn-sm btn-success mb-2">Add Employee</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th style="width: 30%">First Name</th>
+            <th style="width: 30%">Last Name</th>
+            <th style="width: 30%">Job Title</th>
+            <th style="width: 10%"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let employee of employees">
+            <td>{{employee.firstName}}</td>
+            <td>{{employee.lastName}}</td>
+            <td>{{employee.jobTitle}}</td>
+            <!-- <td style="white-space: nowrap">
+                <a routerLink="edit/{{employee.id}}" class="btn btn-sm btn-primary me-1">Edit</a>
+                <button (click)="deleteEmployee(employee.id)" class="btn btn-sm btn-danger btn-delete-employee" [disabled]="employee.isDeleting">
+                    <span *ngIf="employee.isDeleting" class="spinner-border spinner-border-sm"></span>
+                    <span *ngIf="!employee.isDeleting">Delete</span>
+                </button>
+            </td> -->
+        </tr>
+        <tr *ngIf="!employees">
+            <td colspan="4" class="text-center">
+                <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
+        </tr>
+    </tbody>
+    <tr>
+      <th style="width: 30%">Department</th>
+      <th style="width: 30%">Manager</th>
+      <th style="width: 30%">Location</th>
+      <th style="width: 10%"></th>
+  </tr>
+    <tbody>
+      <tr *ngFor="let employee of employees">
+        <td>{{employee.department}}</td>
+        <td>{{employee.manager}}</td>
+        <td>{{employee.location}}</td>
+          <td style="white-space: nowrap">
+              <a routerLink="edit/{{employee.id}}" class="btn btn-sm btn-primary me-1">Edit</a>
+              <button (click)="deleteEmployee(employee.id)" class="btn btn-sm btn-danger btn-delete-employee" [disabled]="employee.isDeleting">
+                  <span *ngIf="employee.isDeleting" class="spinner-border spinner-border-sm"></span>
+                  <span *ngIf="!employee.isDeleting">Delete</span>
+              </button>
+          </td>
+      </tr>
+      <tr *ngIf="!employees">
+          <td colspan="4" class="text-center">
+              <span class="spinner-border spinner-border-lg align-center"></span>
+          </td>
+      </tr>
+  </tbody>
+</table>

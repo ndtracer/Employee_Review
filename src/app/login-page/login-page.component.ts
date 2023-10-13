@@ -23,13 +23,25 @@ export class LoginPageComponent
 
   ngOnInit() {
     this.buildForm();
+    console.log(this.loginForm.value.password)
   }
 
+  // registerNew() {
+  //   this.buildForm();
+  //   console.log("Work Damnniteintenistni")
+  //   console.log(this.loginForm.value.login)
+  // }
+
   invalid = false;
+// started here \\
+  username: string = "";
+
+  password: string = "";
 
   onSubmit() {
     if (this.loginForm.valid) {
       console.log("Submitting form: ", this.loginForm.value);
+      console.log(this.username);
     } else {
       console.error("Form is invalid!");
       this.invalid = !this.invalid
@@ -39,9 +51,11 @@ export class LoginPageComponent
   private buildForm() {
     this.loginForm = this.fb.group({
       login: ["", {validators: Validators.required, updateOn: "submit"}],
-      password: ["",{validators: Validators.required, updateOn: "submit"}]
-    });
+      password: ["",{validators: Validators.required, updateOn: "submit"}],
 
+    });
+    console.log("DYING")
+    console.log(this.loginForm.value.login)
   }
 
 
@@ -50,20 +64,5 @@ export class LoginPageComponent
   toggleRegister(): void {
     this.newUser = !this.newUser
   }
-//   loginForm = document.getElementById("login-form");
-//   loginButton = document.getElementById("login-form-submit");
-//  loginErrorMsg = document.getElementById("login-error-message");
 
-// login(e) {
-//     e.preventDefault();
-//     const username = this.loginForm.username.value;
-//     const password = loginForm.password.value;
-
-//     if (username === "Test" && password === "Pass") {
-//         alert("You have successfully logged in.");
-//         location.replace("/SelectionPagev4.html");
-//     } else {
-//         this.loginErrorMsg.style.opacity = 1;
-//     }
-// }
 }
