@@ -14,20 +14,20 @@
             <td>{{employee.firstName}}</td>
             <td>{{employee.lastName}}</td>
             <td>{{employee.jobTitle}}</td>
-            <!-- <td style="white-space: nowrap">
+            <td style="white-space: nowrap">
                 <a routerLink="edit/{{employee.id}}" class="btn btn-sm btn-primary me-1">Edit</a>
                 <button (click)="deleteEmployee(employee.id)" class="btn btn-sm btn-danger btn-delete-employee" [disabled]="employee.isDeleting">
                     <span *ngIf="employee.isDeleting" class="spinner-border spinner-border-sm"></span>
                     <span *ngIf="!employee.isDeleting">Delete</span>
                 </button>
-            </td> -->
+            </td>
         </tr>
         <tr *ngIf="!employees">
             <td colspan="4" class="text-center">
                 <span class="spinner-border spinner-border-lg align-center"></span>
             </td>
         </tr>
-    </tbody>
+    <!-- </tbody>
     <tr>
       <th style="width: 30%">Department</th>
       <th style="width: 30%">Manager</th>
@@ -46,11 +46,11 @@
                   <span *ngIf="!employee.isDeleting">Delete</span>
               </button>
           </td>
-      </tr>
-      <tr *ngIf="!employees">
+      </tr> -->
+      <!-- <tr *ngIf="!employees">
           <td colspan="4" class="text-center">
               <span class="spinner-border spinner-border-lg align-center"></span>
           </td>
-      </tr>
+      </tr> -->
   </tbody>
 </table>

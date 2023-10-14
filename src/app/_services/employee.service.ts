@@ -24,8 +24,8 @@ export class EmployeeService {
     return this.employeeSubject.value;
   }
 
-  login(employeename: string, password: string) {
-    return this.http.post<Employee>(`${environment.apiUrl}/employees/authenticate`, { employeename, password})
+  login(firstName: string, lastName: string, jobTitle: string, department: string, manager: string, location: string) {
+    return this.http.post<Employee>(`${environment.apiUrl}/employees/authenticate`, { firstName, lastName, jobTitle, department, manager, location })
     .pipe(map(employee => {
       // store employee details and jwt token in local storage to keep employee logged in between page refreshes
       localStorage.setItem('employee', JSON.stringify(employee));
