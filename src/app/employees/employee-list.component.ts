@@ -3,7 +3,7 @@ import { first } from 'rxjs/operators';
 
 import { EmployeeService } from '../_services';
 
-@Component({ templateUrl: 'employee-list.component.html' })
+@Component({ templateUrl: './employee-list.component.html' })
 export class EmployeeListComponent implements OnInit {
   employees?: any[];
 
