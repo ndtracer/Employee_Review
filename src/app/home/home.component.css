@@ -17,7 +17,7 @@
   padding: 0px;
 }
 
-.gradientDiv {
+/* .gradientDiv {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,7 +26,7 @@
   width: fit-content;
   height: fit-content;
   padding: 15px;
-}
+} */
 
 .h1 {
   display: flex;
@@ -35,5 +35,7 @@
   flex-direction: column;
   color: #3a3a3a;
   font-size: 50px;
+  width: fit-content;
+  padding: 50px;
 
 }

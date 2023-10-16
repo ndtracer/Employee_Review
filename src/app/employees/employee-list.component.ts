@@ -3,7 +3,8 @@ import { first } from 'rxjs/operators';
 
 import { EmployeeService } from '../_services';
 
-@Component({ templateUrl: './employee-list.component.html' })
+@Component({ selector: 'employee-list',
+  templateUrl: './employee-list.component.html' })
 export class EmployeeListComponent implements OnInit {
   employees?: any[];
 
@@ -11,8 +12,9 @@ export class EmployeeListComponent implements OnInit {
 
   ngOnInit(): void {
       this.employeeService.getAll()
-      .pipe(first())
-      .subscribe(employees => this.employees = employees);
+      // .pipe(first())
+      // .subscribe(employees => this.employees = employees);
+      // console.log(this.employeeService.employeeValue)
   }
 
   deleteEmployee(id: string) {
@@ -21,5 +23,9 @@ export class EmployeeListComponent implements OnInit {
     this.employeeService.delete(id)
       .pipe(first())
       .subscribe(() => this.employees = this.employees!.filter(x => x.id !== id));
+
   }
+
+
+
 }

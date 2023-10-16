@@ -5,7 +5,7 @@ import { first } from 'rxjs/operators';
 
 import { EmployeeService, AlertService } from '../_services';
 
-@Component({ templateUrl: 'employee-add-edit.component.html' })
+@Component({ selector: 'employee-add-edit', templateUrl: 'employee-add-edit.component.html' })
 export class EmployeeAddEditComponent implements OnInit {
   form!: FormGroup;
   id?: string;
@@ -66,17 +66,17 @@ export class EmployeeAddEditComponent implements OnInit {
 
     this.submitting = true;
     this.saveEmployee()
-      .pipe(first())
-      .subscribe({
-        next: () => {
-          this.alertService.success('Employee saved', { keepAfterRouteChange: true });
-          this.router.navigateByUrl('/employees');
-        },
-        error: error => {
-          this.alertService.error(error);
-          this.submitting = false;
-        }
-      })
+      // .pipe(first())
+      // .subscribe({
+      //   next: () => {
+      //     this.alertService.success('Employee saved', { keepAfterRouteChange: true });
+      //     this.router.navigateByUrl('/employees');
+      //   },
+      //   error: error => {
+      //     this.alertService.error(error);
+      //     this.submitting = false;
+      //   }
+      // })
   }
 
   private saveEmployee() {
@@ -84,5 +84,6 @@ export class EmployeeAddEditComponent implements OnInit {
     return this.id
       ? this.employeeService.update(this.id!, this.form.value)
       : this.employeeService.register(this.form.value);
+
   }
 }
