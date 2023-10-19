@@ -2,10 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, materialize, dematerialize } from 'rxjs/operators';
+import { Employee } from '../_models';
 
 // array in local storage for registered users
-const usersKey = 'angular-14-registration-login-example-users';
+const usersKey = 'login-users';
+const employeeKey = 'employees'
 let users: any[] = JSON.parse(localStorage.getItem(usersKey)!) || [];
+let employees: any [] = JSON.parse(localStorage.getItem(employeeKey)!) || [];
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -28,6 +31,21 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return updateUser();
                 case url.match(/\/users\/\d+$/) && method === 'DELETE':
                     return deleteUser();
+
+
+
+                    // case url.endsWith('/employees/authenticate') && method === 'POST':
+                    // return authenticate();
+                case url.endsWith('/employees/register') && method === 'POST':
+                    return registerEmployee();
+                case url.endsWith('/employees') && method === 'GET':
+                    return getEmployees();
+                case url.match(/\/employees\/\d+$/) && method === 'GET':
+                    return getEmployeeById();
+                case url.match(/\/employees\/\d+$/) && method === 'PUT':
+                    return updateEmployee();
+                case url.match(/\/employees\/\d+$/) && method === 'DELETE':
+                    return deleteEmployee();
                 default:
                     // pass through any requests not handled above
                     return next.handle(request);
@@ -97,6 +115,65 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             return ok();
         }
 
+        // Employee functions
+
+        function registerEmployee() {
+          const employee = body
+
+          if (employees.find(x => x.firstName === employee.firstName && x.lastName === employee.lastName)) {
+              return error('This employee "' + employee.firstName  +' ' + employee.lastName + '" has already been submitted')
+          }
+
+          employee.id = employee.firstName + employee.lastName;
+          // employee.jobTitle = employee.jobTitle;
+          console.log(employee);
+          employees.push(employee);
+          localStorage.setItem(employeeKey, JSON.stringify(employees));
+          return ok();
+      }
+
+      function getEmployees() {
+        // if (!isLoggedIn()) return unauthorized();
+        return ok(employees.map(x => employeeDetails(x)));
+    }
+
+    function getEmployeeById() {
+        // if (!isLoggedIn()) return unauthorized();
+
+        const employee = employees.find(x => x.id === idFromUrl());
+        return ok(employeeDetails(employee));
+    }
+
+    function updateEmployee() {
+        // if (!isLoggedIn()) return unauthorized();
+
+        let params = body;
+        let employee = employees.find(x => x.id === idFromUrl());
+
+        // // only update password if entered
+        // if (!params.password) {
+        //     delete params.password;
+        // }
+
+        // update and save employee
+        Object.assign(employee, params);
+        localStorage.setItem(employeeKey, JSON.stringify(employees));
+
+        return ok();
+    }
+
+    function deleteEmployee() {
+        // if (!isLoggedIn()) return unauthorized();
+
+        employees = employees.filter(x => x.id !== idFromUrl());
+        localStorage.setItem(employeeKey, JSON.stringify(employees));
+        return ok();
+    }
+
+
+
+
+
         // helper functions
 
         function ok(body?: any) {
@@ -118,6 +195,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             const { id, username, firstName, lastName } = user;
             return { id, username, firstName, lastName };
         }
+
+        function employeeDetails(employee: any) {
+          const { id, firstName, lastName, jobTitle, department, manager, location } = employee;
+          return { id, firstName, lastName, jobTitle, department, manager, location};
+      }
 
         function isLoggedIn() {
             return headers.get('Authorization') === 'Bearer fake-jwt-token';

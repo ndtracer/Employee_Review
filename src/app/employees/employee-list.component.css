@@ -1,0 +1,46 @@
+.cardContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: fit-content;
+
+}
+
+.employeeCard {
+  display: flex;
+  justify-content: space-between;
+  width: 30%;
+  padding: 3px;
+  border: 1px solid #3a3a3a;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+
+.employeeName {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: x-large;
+  font-weight: 700;
+
+}
+
+.jobTitle {
+  display: flex;
+  color: #1a74a3;
+  font-size: large;
+  font-weight: 500;
+}
+
+.employeeInfo {
+  display: flex;
+  align-items: center;
+  font-size: medium;
+  color: black;
+}
+
+.employeeDetailTitles {
+  display: flex;
+
+}

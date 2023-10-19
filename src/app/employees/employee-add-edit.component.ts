@@ -25,6 +25,8 @@ export class EmployeeAddEditComponent implements OnInit {
   ngOnInit(): void {
       this.id = this.route.snapshot.params['id'];
 
+      console.log(this.id)
+
       // form with validation rules
       this.form = this.formBuilder.group({
         firstName: ['', Validators.required],
@@ -35,6 +37,8 @@ export class EmployeeAddEditComponent implements OnInit {
         location: ['', Validators.required],
 
       });
+
+
 
       this.title = 'Add Employee'
       if (this.id) {
@@ -66,24 +70,30 @@ export class EmployeeAddEditComponent implements OnInit {
 
     this.submitting = true;
     this.saveEmployee()
-      // .pipe(first())
-      // .subscribe({
-      //   next: () => {
-      //     this.alertService.success('Employee saved', { keepAfterRouteChange: true });
-      //     this.router.navigateByUrl('/employees');
-      //   },
-      //   error: error => {
-      //     this.alertService.error(error);
-      //     this.submitting = false;
-      //   }
-      // })
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          this.alertService.success('Employee saved', { keepAfterRouteChange: true });
+          this.router.navigateByUrl('/employees');
+        },
+        error: error => {
+          this.alertService.error(error);
+          this.submitting = false;
+        }
+      })
+
+
+      // this.submitted = false;
+      // this.submitting = false;
   }
 
   private saveEmployee() {
     // create or update Employee based on id param
+    console.log(this.id)
     return this.id
       ? this.employeeService.update(this.id!, this.form.value)
       : this.employeeService.register(this.form.value);
 
   }
+
 }
