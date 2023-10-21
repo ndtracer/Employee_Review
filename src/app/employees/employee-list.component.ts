@@ -16,16 +16,18 @@ export class EmployeeListComponent implements OnInit {
       this.employeeService.getAll()
       .pipe(first())
       .subscribe(employees => this.employees = employees);
-      console.log(this.employees)
+      // console.log(this.employees)
   }
 
   deleteEmployee(id: string) {
     const employee = this.employees!.find(x => x.id === id);
+    // console.log("hello")
+    // console.log(employee)
     employee.isDeleting = true;
-    this.employeeService.delete(employee.id)
-      .pipe(first())
-      .subscribe(() => this.employees = this.employees!.filter(x => x.id !== id));
-      console.log(employee);
+    this.employeeService.delete(employee)
+      // .pipe(first())
+      // .subscribe(() => this.employees = this.employees!.filter(x => x.id !== id));
+      // console.log(employee);
 
   }
 

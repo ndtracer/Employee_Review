@@ -24,22 +24,22 @@ export class EmployeeService {
     return this.employeeSubject.value;
   }
 
-  login(id: string, firstName: string, lastName: string, jobTitle: string, department: string, manager: string, location: string) {
-    return this.http.post<Employee>(`${environment.apiUrl}/employees/authenticate`, { id, firstName, lastName, jobTitle, department, manager, location })
-    .pipe(map(employee => {
-      // store employee details and jwt token in local storage to keep employee logged in between page refreshes
-      localStorage.setItem('employee', JSON.stringify(employee));
-      this.employeeSubject.next(employee);
-      return employee;
-    }));
-  }
+  // login(id: string, firstName: string, lastName: string, jobTitle: string, department: string, manager: string, location: string) {
+  //   return this.http.post<Employee>(`${environment.apiUrl}/employees/authenticate`, { id, firstName, lastName, jobTitle, department, manager, location })
+  //   .pipe(map(employee => {
+  //     // store employee details and jwt token in local storage to keep employee logged in between page refreshes
+  //     localStorage.setItem('employee', JSON.stringify(employee));
+  //     this.employeeSubject.next(employee);
+  //     return employee;
+  //   }));
+  // }
 
-  logout() {
-    // remove employee from local storage and set current employee to null
-    localStorage.removeItem('employee');
-    this.employeeSubject.next(null);
-    this.router.navigate(['/account/login']);
-  }
+  // logout() {
+  //   // remove employee from local storage and set current employee to null
+  //   localStorage.removeItem('employee');
+  //   this.employeeSubject.next(null);
+  //   this.router.navigate(['/account/login']);
+  // }
 
   register(employee: Employee) {
     // Add id into here!!
@@ -58,7 +58,7 @@ export class EmployeeService {
   }
 
   update(id: string, params: any) {
-    return this.http.put(`${environment.apiUrl}/employees/${id}`, params)
+    return this.http.put(`${environment.apiUrl}/employees/edit/${id}`, params)
     .pipe(map(x => {
       // update stored employee if the logged in employee updated their own record
       if (id == this.employeeValue?.id) {
@@ -73,13 +73,24 @@ export class EmployeeService {
     }));
   }
 
-  delete(id: string) {
-    return this.http.delete(`${environment.apiUrl}/employees/${id}`)
+  delete(employee: Employee) {
+    // this.employeeSubject = null
+
+    console.log(this.employeeSubject)
+    console.log(employee)
+    console.log(employee.id)
+    console.log(this.employee)
+    // this.employee.splice(this.employee)
+    // localStorage.getItem(JSON.stringify(employee))
+
+
+
+    return this.http.delete(`${environment.apiUrl}/employees/${employee.id}`)
     .pipe(map(x => {
-  //     // auto logout if the logged in employee deleted their own record
-  //     if ( id == this.employeeValue?.id) {
-  //       this.logout();
-  //     }
+      // auto logout if the logged in employee deleted their own record
+      // if ( id == this.employeeValue?.id) {
+      //   this.logout();
+      // }
       return x;
     }));
   }

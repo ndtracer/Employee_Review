@@ -309,4 +309,5 @@ display: flex;
 .bottom-space {
   height: 20px;
   background-color: #1a74a3;
+  margin: 0px;
 }

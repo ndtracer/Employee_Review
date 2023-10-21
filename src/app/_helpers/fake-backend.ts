@@ -125,8 +125,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           }
 
           employee.id = employee.firstName + employee.lastName;
-          // employee.jobTitle = employee.jobTitle;
-          console.log(employee);
+
+
           employees.push(employee);
           localStorage.setItem(employeeKey, JSON.stringify(employees));
           return ok();
@@ -145,15 +145,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     }
 
     function updateEmployee() {
-        // if (!isLoggedIn()) return unauthorized();
+        if (!isLoggedIn()) return unauthorized();
 
         let params = body;
         let employee = employees.find(x => x.id === idFromUrl());
-
-        // // only update password if entered
-        // if (!params.password) {
-        //     delete params.password;
-        // }
 
         // update and save employee
         Object.assign(employee, params);
@@ -163,7 +158,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     }
 
     function deleteEmployee() {
-        // if (!isLoggedIn()) return unauthorized();
+        if (!isLoggedIn()) return unauthorized();
 
         employees = employees.filter(x => x.id !== idFromUrl());
         localStorage.setItem(employeeKey, JSON.stringify(employees));

@@ -17,7 +17,8 @@ import { AccountService } from './_services';
 import { User } from './_models';
 // import { NavbarComponent } from './navbar/navbar.component';
 
-@Component({ selector: 'app-root', templateUrl: 'app.component.html' })
+@Component({ selector: 'app-root', templateUrl: 'app.component.html',
+styleUrls: ['./app.component.css'] })
 export class AppComponent {
     user?: User | null;
 

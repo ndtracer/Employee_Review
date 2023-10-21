@@ -25,6 +25,7 @@ export class AddEditComponent implements OnInit {
   ngOnInit(): void {
       this.id = this.route.snapshot.params['id'];
 
+      console.log(this.id)
       // form with validation rules
       this.form = this.formBuilder.group({
         firstName: ['', Validators.required],
