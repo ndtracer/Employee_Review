@@ -13,6 +13,12 @@ const routes: Routes = [
     { path: 'users', loadChildren: usersModule, canActivate: [AuthGuard] },
     { path: 'account', loadChildren: accountModule },
     { path: 'employees', loadChildren: employeesModule, canActivate: [AuthGuard] },
+    { path: 'inventory', loadChildren: accountModule },
+    { path: 'maintenance', loadChildren: accountModule },
+    { path: 'trailer-inventory', loadChildren: accountModule },
+    { path: 'employee-review', loadChildren: accountModule },
+
+
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

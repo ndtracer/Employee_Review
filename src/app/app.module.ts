@@ -39,6 +39,8 @@ import { AppComponent } from './app.component';
 import { AlertComponent } from './_components';
 import { HomeComponent } from './home';
 import { TrailerInventoryComponent } from './trailer-Inventory/trailer-inventory.component';
+import { InventoryComponent } from './inventory/inventory/inventory.component';
+import { MaintenanceComponent } from './maintenance/maintenance.component';
 
 
 
@@ -57,7 +59,9 @@ import { TrailerInventoryComponent } from './trailer-Inventory/trailer-inventory
         EmployeeReviewComponent,
         NavbarComponent,
         LoginPageComponent,
-        TrailerInventoryComponent
+        TrailerInventoryComponent,
+        InventoryComponent,
+        MaintenanceComponent
 
     ],
     providers: [
