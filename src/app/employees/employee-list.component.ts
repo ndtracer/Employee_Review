@@ -13,24 +13,26 @@ export class EmployeeListComponent implements OnInit {
   constructor( private employeeService: EmployeeService) {}
 
   ngOnInit(): void {
+    // let allEmployees = this.employeeService.getAll()
+    // console.log(allEmployees)
       this.employeeService.getAll()
       .pipe(first())
       .subscribe(employees => this.employees = employees);
-      // console.log(this.employees)
+
   }
 
   deleteEmployee(id: string) {
     const employee = this.employees!.find(x => x.id === id);
-    // console.log("hello")
-    // console.log(employee)
+    console.log("list delete", employee.id)
+    console.log(id)
+
     employee.isDeleting = true;
-    this.employeeService.delete(employee)
-      // .pipe(first())
-      // .subscribe(() => this.employees = this.employees!.filter(x => x.id !== id));
-      // console.log(employee);
+    this.employeeService.delete(employee.id)
+      .pipe(first())
+      .subscribe(() => this.employees = this.employees!.filter(x => x.id !== id));
+
+
 
   }
-
-
 
 }

@@ -45,7 +45,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 case url.match(/\/employees\/\d+$/) && method === 'PUT':
                     return updateEmployee();
                 case url.match(/\/employees\/\d+$/) && method === 'DELETE':
-                    return deleteEmployee();
+                      return deleteEmployee();
                 default:
                     // pass through any requests not handled above
                     return next.handle(request);
@@ -124,8 +124,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               return error('This employee "' + employee.firstName  +' ' + employee.lastName + '" has already been submitted')
           }
 
-          employee.id = employee.firstName + employee.lastName;
-
+          // employee.id = employee.firstName + employee.lastName;
+          employee.id = employees.length ? Math.max(...employees.map(x => x.id)) + 1 : 1;
 
           employees.push(employee);
           localStorage.setItem(employeeKey, JSON.stringify(employees));
@@ -145,22 +145,24 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     }
 
     function updateEmployee() {
-        if (!isLoggedIn()) return unauthorized();
-
+        // if (!isLoggedIn()) return unauthorized();
+console.log("hello")
         let params = body;
         let employee = employees.find(x => x.id === idFromUrl());
 
         // update and save employee
+        // employees.push(employee);
         Object.assign(employee, params);
+        console.log(Object)
         localStorage.setItem(employeeKey, JSON.stringify(employees));
 
         return ok();
     }
 
     function deleteEmployee() {
-        if (!isLoggedIn()) return unauthorized();
-
+        // if (!isLoggedIn()) return unauthorized();
         employees = employees.filter(x => x.id !== idFromUrl());
+
         localStorage.setItem(employeeKey, JSON.stringify(employees));
         return ok();
     }

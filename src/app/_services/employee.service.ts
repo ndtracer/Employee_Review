@@ -9,7 +9,7 @@ import { Employee } from '../_models';
 
 @Injectable({ providedIn: 'root' })
 export class EmployeeService {
-  private employeeSubject: BehaviorSubject<Employee | null>;
+  public employeeSubject: BehaviorSubject<Employee | null>;
   public employee: Observable<Employee | null>;
 
   constructor(
@@ -54,38 +54,41 @@ export class EmployeeService {
   }
 
   getById(id: string) {
+    console.log(this.http.get<Employee>(`${environment.apiUrl}/employees/${id}`))
     return this.http.get<Employee>(`${environment.apiUrl}/employees/${id}`);
   }
 
   update(id: string, params: any) {
-    return this.http.put(`${environment.apiUrl}/employees/edit/${id}`, params)
+
+    console.log("Aaha")
+    return this.http.put(`${environment.apiUrl}/employees/${id}`, params)
     .pipe(map(x => {
       // update stored employee if the logged in employee updated their own record
-      if (id == this.employeeValue?.id) {
+      // if (id == this.employeeValue?.id) {
         // update local storage
         const employee = { ...this.employeeValue, ...params };
         localStorage.setItem('employee', JSON.stringify(employee));
 
         // publish updated employee to subscribers
         this.employeeSubject.next(employee);
-      }
+      // }
       return x;
     }));
   }
 
-  delete(employee: Employee) {
-    // this.employeeSubject = null
-
-    console.log(this.employeeSubject)
-    console.log(employee)
-    console.log(employee.id)
-    console.log(this.employee)
-    // this.employee.splice(this.employee)
-    // localStorage.getItem(JSON.stringify(employee))
+  delete(id: string) {
 
 
 
-    return this.http.delete(`${environment.apiUrl}/employees/${employee.id}`)
+    console.log("employee service", this.employee )
+    console.log("id:", id)
+    console.log("employeeSubject:", this.employeeSubject.value)
+
+
+
+
+    return this.http.delete
+    (`${environment.apiUrl}/employees/${id}`)
     .pipe(map(x => {
       // auto logout if the logged in employee deleted their own record
       // if ( id == this.employeeValue?.id) {

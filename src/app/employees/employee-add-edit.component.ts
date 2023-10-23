@@ -23,7 +23,7 @@ export class EmployeeAddEditComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-      this.id = this.route.snapshot.params['employee.id'];
+      this.id = this.route.snapshot.params['id'];
 
 
       console.log(this.id)
@@ -52,6 +52,7 @@ export class EmployeeAddEditComponent implements OnInit {
           this.form.patchValue(x);
           this.loading = false;
         });
+        console.log(this.employeeService.getById(this.id))
       }
   }
 
