@@ -52,7 +52,7 @@ export class EmployeeAddEditComponent implements OnInit {
           this.form.patchValue(x);
           this.loading = false;
         });
-        console.log(this.employeeService.getById(this.id))
+        console.log("this one", this.employeeService.getById(this.id))
       }
   }
 

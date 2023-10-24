@@ -54,7 +54,7 @@ export class EmployeeService {
   }
 
   getById(id: string) {
-    console.log(this.http.get<Employee>(`${environment.apiUrl}/employees/${id}`))
+
     return this.http.get<Employee>(`${environment.apiUrl}/employees/${id}`);
   }
 
@@ -82,7 +82,7 @@ export class EmployeeService {
 
     console.log("employee service", this.employee )
     console.log("id:", id)
-    console.log("employeeSubject:", this.employeeSubject.value)
+
 
 
 
@@ -90,10 +90,7 @@ export class EmployeeService {
     return this.http.delete
     (`${environment.apiUrl}/employees/${id}`)
     .pipe(map(x => {
-      // auto logout if the logged in employee deleted their own record
-      // if ( id == this.employeeValue?.id) {
-      //   this.logout();
-      // }
+
       return x;
     }));
   }

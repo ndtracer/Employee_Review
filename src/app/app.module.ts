@@ -1,5 +1,5 @@
 
-import { EmployeeReviewComponent } from './employee-review-components/employee-review/employee-review.component';
+// import { EmployeeReviewComponent } from './employee-review-components/employee-review/employee-review.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
 
@@ -16,9 +16,9 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { AppComponent } from './app.component';
 import { AlertComponent } from './_components';
 import { HomeComponent } from './home';
-import { TrailerInventoryComponent } from './trailer-Inventory/trailer-inventory.component';
-import { InventoryComponent } from './inventory/inventory/inventory.component';
-import { MaintenanceComponent } from './maintenance/maintenance.component';
+// import { TrailerInventoryModule } from './trailer-Inventory/trailer-inventory.module';
+// import { InventoryComponent } from './inventory/inventory/inventory.component';
+// import { MaintenanceComponent } from './maintenance/maintenance.component';
 
 
 
@@ -28,17 +28,18 @@ import { MaintenanceComponent } from './maintenance/maintenance.component';
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
-        AppRoutingModule
+        AppRoutingModule,
+        // TrailerInventoryModule,
     ],
     declarations: [
         AppComponent,
         AlertComponent,
         HomeComponent,
-        EmployeeReviewComponent,
+        // EmployeeReviewComponent,
         NavbarComponent,
-        TrailerInventoryComponent,
-        InventoryComponent,
-        MaintenanceComponent
+
+        // InventoryComponent,
+        // MaintenanceComponent
 
     ],
     providers: [
