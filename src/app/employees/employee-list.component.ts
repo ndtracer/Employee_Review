@@ -3,36 +3,36 @@ import { first } from 'rxjs/operators';
 
 import { EmployeeService } from '../_services';
 
-@Component({ selector: 'employee-list',
+@Component({
+  selector: 'employee-list',
   templateUrl: './employee-list.component.html',
-  styleUrls: ['./employee-list.component.css']
+  styleUrls: ['./employee-list.component.css'],
 })
 export class EmployeeListComponent implements OnInit {
   employees?: any[];
 
-  constructor( private employeeService: EmployeeService) {}
+  constructor(private employeeService: EmployeeService) {}
 
   ngOnInit(): void {
-    // let allEmployees = this.employeeService.getAll()
-    // console.log(allEmployees)
-      this.employeeService.getAll()
+    this.employeeService
+      .getAll()
       .pipe(first())
-      .subscribe(employees => this.employees = employees);
-
+      .subscribe((employees) => {
+        this.employees = employees;
+      });
   }
 
   deleteEmployee(id: string) {
-    const employee = this.employees!.find(x => x.id === id);
-    console.log("list delete", employee.id)
-    console.log(id)
+    const employee = this.employees?.find((x) => x.id === id);
+    if (!employee) return;
 
     employee.isDeleting = true;
-    this.employeeService.delete(employee.id)
+
+    this.employeeService
+      .delete(employee.id)
       .pipe(first())
-      .subscribe(() => this.employees = this.employees!.filter(x => x.id !== id));
-
-
-
+      .subscribe(
+        () => (this.employees = this.employees?.filter((x) => x.id !== id))
+      );
   }
-
 }
