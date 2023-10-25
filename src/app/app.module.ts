@@ -1,5 +1,3 @@
-
-// import { EmployeeReviewComponent } from './employee-review-components/employee-review/employee-review.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
 
@@ -16,10 +14,8 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { AppComponent } from './app.component';
 import { AlertComponent } from './_components';
 import { HomeComponent } from './home';
-// import { TrailerInventoryModule } from './trailer-Inventory/trailer-inventory.module';
-// import { InventoryComponent } from './inventory/inventory/inventory.component';
-// import { MaintenanceComponent } from './maintenance/maintenance.component';
 
+import { UniqueLocationPipe } from './_pipes/employee-locations.pipe';
 
 
 @NgModule({
@@ -29,18 +25,13 @@ import { HomeComponent } from './home';
         ReactiveFormsModule,
         HttpClientModule,
         AppRoutingModule,
-        // TrailerInventoryModule,
     ],
     declarations: [
         AppComponent,
         AlertComponent,
         HomeComponent,
-        // EmployeeReviewComponent,
         NavbarComponent,
-
-        // InventoryComponent,
-        // MaintenanceComponent
-
+        // UniquePipe,
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

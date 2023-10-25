@@ -374,3 +374,24 @@
   font-family:sans-serif;
   background-color: #f2f3f5
 }
+
+.warningDiv {
+  display: flex;
+  justify-content: center;
+}
+
+
+.pleaseAddWarning {
+  display: flex;
+  justify-content: center;
+  justify-self: center;
+  justify-items: center;
+  border-radius: 5px;
+  background-color: #f2f3f5;
+  align-items: center;
+  font-size: large;
+  margin-top: 40px;
+
+  padding: 40px;
+  box-shadow: 12px 12px 5px #3a3a3a;
+}

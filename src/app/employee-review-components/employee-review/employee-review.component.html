@@ -1,8 +1,10 @@
 <body class="body">
 
+  <div class="warningDiv">
+  <p class="pleaseAddWarning" *ngIf="(employees | json ) == '[]'">Please add employees in the Employees Tab above</p>
+</div>
 
-
-<main class="main">
+<main class="main" *ngIf="(employees | json ) !='[]'">
 
   <h2 class="h2">
     <div class="selectionDiv">
@@ -25,10 +27,21 @@
   <h2 class="h2">
       Please Select a {{titleId}}
 
-      <ul id="WorksitePlacement">
+
+      <div id="WorksitePlacement" *ngFor="let location of employees | uniqueLocation">
+
+        <button >{{this.location.location}}</button>
+      </div>
+
+      <div *ngFor="let department of employees | uniqueLocation">
+        <div>Department: {{this.department.department}}</div>
+        <div>Manager: {{this.department.manager}}</div>
+
+      </div>
+
+      <h2 class="h2"></h2>
 
 
-      </ul>
       <!-- <menu id="worksiteAddRemMenu">
           <button type="button" name="worksiteAddButton" id="worksiteAddButton">&plus;</button>
           <form action="" id="worksiteAdd" class="worksiteAddForm">
@@ -41,7 +54,7 @@
 
 
 
-      <button type="button" class="AddEditRemoveBtn">Add, Edit, Remove</button>
+      <!-- <button type="button" class="AddEditRemoveBtn">Add, Edit, Remove</button> -->
 
       <!-- <button type="button"
       id="worksiteEditBtn"
@@ -51,8 +64,8 @@
 
 
   </h2>
+</main>
 
-  <h2 class="h2"></h2>
   <!-- <h2 class="h2" id="Dept-Managerh2">
       Please Select a Department/Manager
 
@@ -78,6 +91,4 @@
 
 
       <button type="button" id="employeeAddRemButton">Add, Edit, Remove</button>
-  </h2>
-</main> -->
-
+   </h2> -->
