@@ -6,9 +6,11 @@ import { Employee } from '../_models';
 
 // array in local storage for registered users
 const usersKey = 'login-users';
-const employeeKey = 'employees'
+const employeeKey = 'employees';
+const locationKey = 'locations';
 let users: any[] = JSON.parse(localStorage.getItem(usersKey)!) || [];
 let employees: any [] = JSON.parse(localStorage.getItem(employeeKey)!) || [];
+let locations: any[] = JSON.parse(localStorage.getItem(locationKey)!) || [];
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -46,6 +48,26 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return updateEmployee();
                 case url.match(/\/employees\/\d+$/) && method === 'DELETE':
                       return deleteEmployee();
+
+
+
+                      case url.endsWith('/locations/register') && method === 'POST':
+                        return registerLocation();
+                    case url.endsWith('/locations') && method === 'GET':
+                        return getLocations();
+                    case url.match(/\/locations\/\d+$/) && method === 'GET':
+                        return getLocationById();
+                    case url.match(/\/locations\/\d+$/) && method === 'PUT':
+                        return updateLocation();
+                    case url.match(/\/locations\/\d+$/) && method === 'DELETE':
+                          return deleteLocation();
+
+
+
+
+
+
+
                 default:
                     // pass through any requests not handled above
                     return next.handle(request);
@@ -168,6 +190,65 @@ console.log("hello")
     }
 
 
+// Location Functions
+
+function registerLocation() {
+  const location = body
+
+  if (locations.find(x => x.location)) {
+      return error('This location "' + location.location +'" has already been submitted')
+  }
+
+  // location.id = location.firstName + location.lastName;
+  // location.id = locations.length ? Math.max(...locations.map(x => x.id)) + 1 : 1;
+
+  locations.push(location);
+  localStorage.setItem(locationKey, JSON.stringify(locations));
+  return ok();
+}
+
+function getLocations() {
+// if (!isLoggedIn()) return unauthorized();
+return ok(locations.map(x => locationDetails(x)));
+}
+
+function getLocationById() {
+// if (!isLoggedIn()) return unauthorized();
+
+const location = locations.find(x => x.id === idFromUrl());
+return ok(locationDetails(location));
+}
+
+function updateLocation() {
+// if (!isLoggedIn()) return unauthorized();
+console.log("hello")
+let params = body;
+let location = locations.find(x => x.id === idFromUrl());
+
+// update and save location
+// locations.push(location);
+Object.assign(location, params);
+console.log(Object)
+localStorage.setItem(locationKey, JSON.stringify(locations));
+
+return ok();
+}
+
+function deleteLocation() {
+// if (!isLoggedIn()) return unauthorized();
+locations = locations.filter(x => x.id !== idFromUrl());
+
+localStorage.setItem(locationKey, JSON.stringify(locations));
+return ok();
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -197,6 +278,12 @@ console.log("hello")
           const { id, firstName, lastName, jobTitle, department, manager, location } = employee;
           return { id, firstName, lastName, jobTitle, department, manager, location};
       }
+
+        function locationDetails(location: any) {
+          const { locationid } = location;
+          return { locationid };
+        }
+
 
         function isLoggedIn() {
             return headers.get('Authorization') === 'Bearer fake-jwt-token';

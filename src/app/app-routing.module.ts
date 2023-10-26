@@ -13,6 +13,7 @@ const inventoryModule = () => import('./inventory/inventory/inventory.module').t
 const maintenanceModule = () => import('./maintenance/maintenance.module').then(x => x.MaintenanceModule);
 const trailerInventoryModule = () => import('./trailer-Inventory/trailer-inventory.module').then(x => x.TrailerInventoryModule);
 const settingsModule = () => import('./settings/settings.module').then(x => x.SettingsModule);
+const locationsModule = () => import('./settings/locations/locations.module').then(x=>x.LocationsModule)
 
 const routes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -24,7 +25,7 @@ const routes: Routes = [
     { path: 'trailer-inventory', loadChildren: trailerInventoryModule },
     { path: 'employee-review', loadChildren: employeeReviewModule },
     { path: 'settings', loadChildren: settingsModule },
-
+    { path: 'locations', loadChildren: locationsModule},
 
 
     // otherwise redirect to home

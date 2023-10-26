@@ -16,6 +16,7 @@ import { AlertComponent } from './_components';
 import { HomeComponent } from './home';
 
 import { UniqueLocationPipe } from './_pipes/employee-locations.pipe';
+// import { LocationsModule } from './settings/locations/locations.module';
 
 
 @NgModule({
@@ -25,12 +26,14 @@ import { UniqueLocationPipe } from './_pipes/employee-locations.pipe';
         ReactiveFormsModule,
         HttpClientModule,
         AppRoutingModule,
+        // LocationsModule
     ],
     declarations: [
         AppComponent,
         AlertComponent,
         HomeComponent,
         NavbarComponent,
+
         // UniquePipe,
     ],
     providers: [

@@ -1,9 +1,76 @@
 <body>
 
 
-<h1>settings Works!</h1>
+<h1 style="display: flex; justify-content: center;">Settings</h1>
+<hr>
+<div class="settingsContainer">
 
+  <!-- <div class="settingsItem">
+    <button type="button" class="btn  btn-light" (click)="departmentClick()">Departments and Managers</button>
+    <div *ngIf="departmentList == true">
+    <div>
+      <br>
+    </div>
+
+    <div >
+    <button class="addButton">&plus;</button></div>
+  </div>
+  </div> -->
+
+<div><br></div>
+
+
+  <div class="settingsItem">
+    <button type="button" class="btn  btn-light" (click)="locationClick()">Locations</button>
+      <div *ngIf="locationsList == true">
+        <div>
+         <br>
+        </div>
 <div>
-  <a routerLink="/users" routerLinkActive="active" type="none" style="color: aliceblue;">click here for users</a>
+  <!-- <app-locations></app-locations> -->
+<!--
+  <app-locations-add-edit></app-locations-add-edit> -->
 </div>
-</body>
+        <div><br></div>
+        <div style="display: flex; align-items: center; flex-direction: column;">
+
+        <button  name="addLocationBtn" class="addButton" routerLink="/locations" routerLinkActive="active" >&plus;</button>
+        <label style="color: aliceblue;">Add new</label>
+        </div>
+      </div>
+  </div>
+
+  <div><br></div>
+
+  <!-- <div class="settingsItem">
+    <button type="button"  class="btn  btn-light" (click)="formClick()">Review Form Editing</button>
+<div *ngIf="reviewForm == true">
+    <div>
+      <br>
+    </div>
+
+    <div style="display: flex; justify-content: space-evenly">
+      <button type="button">View Form</button>
+ <div></div>
+    <button class="addButton" type="button" >&plus;</button></div>
+    </div>
+  </div>
+
+
+  </div>
+
+  <div><br></div>
+
+  <div class="settingsItem" style="justify-self: center;">
+    <button type="button" routerLink="/users" routerLinkActive="active" class="btn  btn-light">Authorized Login Users</button>
+
+    <div>
+      <br>
+    </div>
+
+    <div *ngIf="authorizedLoginUsers == true">
+    <button class="addButton" type="button" routerLink="/users/add" routerLinkActive="active" >&plus;</button></div>
+    </div> -->
+
+
+
