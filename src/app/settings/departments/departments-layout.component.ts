@@ -1,4 +1,6 @@
 import { Component } from "@angular/core";
 
-@Component({ templateUrl: 'departments-layout.component.html' })
+@Component({
+  selector: 'departments-layout',
+  templateUrl: 'departments-layout.component.html' })
 export class DepartmentsLayoutComponent{ }
