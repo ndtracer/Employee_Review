@@ -1,5 +1,7 @@
-import { Component,} from '@angular/core';
-
+import { Component, OnInit} from '@angular/core';
+import { LocationService } from '../_services/location.service';
+import { DepartmentService } from '../_services';
+import { first } from 'rxjs';
 
 
 
@@ -9,7 +11,12 @@ import { Component,} from '@angular/core';
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css'],
 })
-export class SettingsComponent  {
+export class SettingsComponent implements OnInit {
+
+  locations?: any[];
+  departments?: any[];
+
+
   locationsList: boolean = false;
 
   departmentList: boolean = false;
@@ -17,6 +24,22 @@ export class SettingsComponent  {
   reviewForm: boolean = false;
 
   authorizedLoginUsers: boolean = false;
+
+
+
+
+  constructor( private locationService: LocationService, private departmentService: DepartmentService) {}
+
+  ngOnInit(): void {
+      this.locationService.getAll()
+      .pipe(first())
+      .subscribe(locations => this.locations = locations);
+
+      this.departmentService.getAll()
+      .pipe(first())
+      .subscribe(departments => this.departments = departments);
+
+  }
 
   locationClick () {
     if(this.locationsList== false) {

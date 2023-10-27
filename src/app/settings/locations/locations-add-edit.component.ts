@@ -32,7 +32,7 @@ export class LocationsAddEditComponent implements OnInit {
       // form with validation rules
       this.form = this.formBuilder.group({
 
-        location: ['', Validators.required],
+        locationName: ['', Validators.required],
 
       });
 
@@ -68,6 +68,7 @@ export class LocationsAddEditComponent implements OnInit {
     }
 
     this.submitting = true;
+
     this.saveLocation()
       .pipe(first())
       .subscribe({
@@ -76,6 +77,7 @@ export class LocationsAddEditComponent implements OnInit {
           this.router.navigateByUrl('/locations');
         },
         error: error => {
+
           this.alertService.error(error);
           this.submitting = false;
         }
@@ -84,7 +86,7 @@ export class LocationsAddEditComponent implements OnInit {
 
   private saveLocation() {
     // create or update Employee based on id param
-    console.log(this.id)
+
     return this.id
       ? this.locationService.update(this.id!, this.form.value)
       : this.locationService.register(this.form.value);

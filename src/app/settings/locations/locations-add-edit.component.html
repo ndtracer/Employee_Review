@@ -4,9 +4,9 @@
 
       <div class="mb-3 col">
         <label class="form-label">Location
-        <input type="text" formControlName="location" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['location'].errors }" /></label>
-        <div *ngIf="submitted && f['location'].errors" class="invalid-feedback">
-            <div *ngIf="f['location'].errors['required']">Location is required</div>
+        <input type="text" formControlName="locationName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['locationName'].errors }" /></label>
+        <div *ngIf="submitted && f['locationName'].errors" class="invalid-feedback">
+            <div *ngIf="f['locationName'].errors['required']">Location is required</div>
         </div>
       </div>
     </div>
@@ -23,4 +23,4 @@
 <div *ngIf="loading" class="text-center m-5">
     <span class="spinner-border spinner-border-lg align-center"></span>
 </div>
-<p>Hello World</p>
+

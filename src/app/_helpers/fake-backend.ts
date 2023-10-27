@@ -8,9 +8,12 @@ import { Employee } from '../_models';
 const usersKey = 'login-users';
 const employeeKey = 'employees';
 const locationKey = 'locations';
+const departmentKey = 'departments';
+
 let users: any[] = JSON.parse(localStorage.getItem(usersKey)!) || [];
 let employees: any [] = JSON.parse(localStorage.getItem(employeeKey)!) || [];
 let locations: any[] = JSON.parse(localStorage.getItem(locationKey)!) || [];
+let departments: any[] = JSON.parse(localStorage.getItem(departmentKey)!) || [];
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -51,19 +54,28 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
 
 
-                      case url.endsWith('/locations/register') && method === 'POST':
-                        return registerLocation();
-                    case url.endsWith('/locations') && method === 'GET':
-                        return getLocations();
-                    case url.match(/\/locations\/\d+$/) && method === 'GET':
-                        return getLocationById();
-                    case url.match(/\/locations\/\d+$/) && method === 'PUT':
-                        return updateLocation();
-                    case url.match(/\/locations\/\d+$/) && method === 'DELETE':
-                          return deleteLocation();
+                case url.endsWith('/locations/register') && method === 'POST':
+                    return registerLocation();
+                case url.endsWith('/locations') && method === 'GET':
+                    return getLocations();
+                case url.match(/\/locations\/\d+$/) && method === 'GET':
+                    return getLocationById();
+                case url.match(/\/locations\/\d+$/) && method === 'PUT':
+                    return updateLocation();
+                case url.match(/\/locations\/\d+$/) && method === 'DELETE':
+                    return deleteLocation();
 
 
-
+                 case url.endsWith('/departments/register') && method === 'POST':
+                      return registerDepartment();
+                  case url.endsWith('/departments') && method === 'GET':
+                      return getDepartments();
+                  case url.match(/\/departments\/\d+$/) && method === 'GET':
+                      return getDepartmentById();
+                  case url.match(/\/departments\/\d+$/) && method === 'PUT':
+                      return updateDepartment();
+                  case url.match(/\/departments\/\d+$/) && method === 'DELETE':
+                      return deleteDepartment();
 
 
 
@@ -194,17 +206,18 @@ console.log("hello")
 
 function registerLocation() {
   const location = body
-
-  if (locations.find(x => x.location)) {
-      return error('This location "' + location.location +'" has already been submitted')
+  console.log("Registering Started")
+  if (locations.find(x => x.locationName === location.locationName)) {
+      return error('This location "' + location.locationName +'" has already been submitted')
   }
 
   // location.id = location.firstName + location.lastName;
-  // location.id = locations.length ? Math.max(...locations.map(x => x.id)) + 1 : 1;
+  location.id = locations.length ? Math.max(...locations.map(x => x.id)) + 1 : 1;
 
   locations.push(location);
   localStorage.setItem(locationKey, JSON.stringify(locations));
   return ok();
+
 }
 
 function getLocations() {
@@ -244,9 +257,58 @@ return ok();
 
 
 
+// Department Functions
 
+function registerDepartment() {
+  const department = body
+  console.log("Registering Started")
+  if (departments.find(x => x.departmentName === department.departmentName)) {
+      return error('This department "' + department.departmentName +'" has already been submitted')
+  }
 
+  // department.id = department.firstName + department.lastName;
+  department.id = departments.length ? Math.max(...departments.map(x => x.id)) + 1 : 1;
 
+  departments.push(department);
+  localStorage.setItem(departmentKey, JSON.stringify(departments));
+  return ok();
+
+}
+
+function getDepartments() {
+// if (!isLoggedIn()) return unauthorized();
+return ok(departments.map(x => departmentDetails(x)));
+}
+
+function getDepartmentById() {
+// if (!isLoggedIn()) return unauthorized();
+
+const department = departments.find(x => x.id === idFromUrl());
+return ok(departmentDetails(department));
+}
+
+function updateDepartment() {
+// if (!isLoggedIn()) return unauthorized();
+console.log("hello")
+let params = body;
+let department = departments.find(x => x.id === idFromUrl());
+
+// update and save department
+// departments.push(department);
+Object.assign(department, params);
+console.log(Object)
+localStorage.setItem(departmentKey, JSON.stringify(departments));
+
+return ok();
+}
+
+function deleteDepartment() {
+// if (!isLoggedIn()) return unauthorized();
+departments = departments.filter(x => x.id !== idFromUrl());
+
+localStorage.setItem(departmentKey, JSON.stringify(departments));
+return ok();
+}
 
 
 
@@ -280,8 +342,13 @@ return ok();
       }
 
         function locationDetails(location: any) {
-          const { locationid } = location;
-          return { locationid };
+          const { id, locationName } = location;
+          return { id, locationName };
+        }
+
+        function departmentDetails(department: any) {
+          const { id, departmentName, manager } = department;
+          return { id, departmentName, manager};
         }
 
 

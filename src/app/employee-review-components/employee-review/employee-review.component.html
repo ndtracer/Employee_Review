@@ -6,8 +6,8 @@
 
 <main class="main" *ngIf="(employees | json ) !='[]'">
 
-  <h2 class="h2">
-    <div class="selectionDiv">
+  <h2 class="h2" >
+    <!-- <div class="selectionDiv">
     Worksite </div>
       <div class="selection">worksite 1</div>
 
@@ -18,26 +18,29 @@
 
 
     <div class="selectionDiv">Employee</div>
-    <div class="selection"> Employee 1</div>
+    <div class="selection"> Employee 1</div> -->
 
 
   </h2>
 
 
   <h2 class="h2">
-      Please Select a {{titleId}}
+    Please Select a {{titleId}}
 
+    <div>
 
-      <div id="WorksitePlacement" *ngFor="let location of employees | uniqueLocation">
+      <div id="WorksitePlacement" *ngFor="let employee of employees | unique: 'location' ">
 
-        <button >{{this.location.location}}</button>
+        <button >{{employee.location}}</button>
       </div>
+      <button>All Locations</button>
+    </div>
 
-      <div *ngFor="let department of employees | uniqueLocation">
-        <div>Department: {{this.department.department}}</div>
-        <div>Manager: {{this.department.manager}}</div>
+      <!-- <div *ngFor="let department of employees | unique">
+        <div>Department: {{this.department.department}}</div> -->
+        <!-- <div>Manager: {{this.department.manager}}</div>
 
-      </div>
+      </div> -->
 
       <h2 class="h2"></h2>
 

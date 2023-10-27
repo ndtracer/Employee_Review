@@ -15,7 +15,7 @@ import { AppComponent } from './app.component';
 import { AlertComponent } from './_components';
 import { HomeComponent } from './home';
 
-import { UniqueLocationPipe } from './_pipes/employee-locations.pipe';
+// import { UniquePipe } from './_pipes/employee-locations.pipe';
 // import { LocationsModule } from './settings/locations/locations.module';
 
 

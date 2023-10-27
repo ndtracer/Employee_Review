@@ -26,13 +26,13 @@ export class LocationService {
 
 
   register(location: Location) {
-
-    return this.http.post(`${environment.apiUrl}/location/register`, location);
+    console.log("This is the next step")
+    return this.http.post(`${environment.apiUrl}/locations/register`, location);
 
   }
 
   getAll() {
-    return this.http.get<Location[]>(`${environment.apiUrl}/location`);
+    return this.http.get<Location[]>(`${environment.apiUrl}/locations`);
   }
 
   getById(id: string) {

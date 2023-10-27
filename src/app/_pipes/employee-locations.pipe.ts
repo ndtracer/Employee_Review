@@ -1,32 +1,28 @@
 import { Pipe, PipeTransform } from "@angular/core";
+import { Employee } from "../_models";
 
 
+
+export type FilterByT = 'location' | 'department'
 @Pipe({
-  name: 'uniqueLocation',
-  pure: false
+  name: 'unique',
+  // pure: false
 })
-export class UniqueLocationPipe implements PipeTransform {
+export class UniquePipe implements PipeTransform {
 
-  transform(employees: any[]) {
-      return employees.filter(e => e.department==e.department);
-      }
+
+
+
+  transform(employees: Employee[], filterBy: FilterByT): Employee[]  {
+    const uniqueVals = []
+    const filteredEmployees = employees.filter(employee => { if (!uniqueVals.includes(employee[filterBy])) {
+      uniqueVals.push(employee[filterBy])
+      return employee
+    }
+
+    })
+  return filteredEmployees
+
   }
+}
 
-  // @Pipe({
-  //   name: 'filter'
-  // })
-  // export class FilterPipe implements PipeTransform{
-
-  //   transform(value: any, filterString: string, propName: string): any {
-  //       if (value.length === 0) {
-  //         return value;
-  //       }
-  //       for (const item of value) {
-  //         const resultArray = [];
-  //         if (item[propName] === filterString) {
-  //           resultArray.push(item);
-  //         }
-  //         return resultArray;
-  //       }
-  //   }
-  // }

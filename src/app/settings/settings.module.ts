@@ -5,8 +5,7 @@ import { CommonModule } from '@angular/common';
 import { SettingsRoutingModule } from './settings-routing.module';
 import { SettingsComponent } from './settings.component';
 import { LocationsModule } from './locations/locations.module';
-// import { LocationsAddEditComponent } from './locations/locations-add-edit.component';
-
+import { DepartmentsModule } from './departments/departments.module';
 
 
 
@@ -17,7 +16,7 @@ import { LocationsModule } from './locations/locations.module';
         ReactiveFormsModule,
         SettingsRoutingModule,
         LocationsModule,
-
+        DepartmentsModule,
 
     ],
     declarations: [

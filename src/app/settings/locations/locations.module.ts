@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { LocationsRoutingModule } from './locations-routing.module';
 import { LocationsComponent } from './locations.component';
 import { LocationsAddEditComponent } from './locations-add-edit.component';
+import { LocationsLayoutComponent } from './locations-layout.component';
 
 
 
@@ -15,15 +16,12 @@ import { LocationsAddEditComponent } from './locations-add-edit.component';
         LocationsRoutingModule,
 
     ],
-    exports:[
-      // LocationsComponent,
-      // LocationsAddEditComponent,
 
-    ],
 
     declarations: [
         LocationsComponent,
-        LocationsAddEditComponent
+        LocationsAddEditComponent,
+        LocationsLayoutComponent,
 
     ],
 })

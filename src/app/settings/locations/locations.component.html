@@ -1,6 +1,5 @@
-<h1>locations works</h1>
 <h1 style="display: flex; justify-content: space-between;">Locations
-  <a routerLink="/settings" routerLinkActive="active" class="btn btn-sm btn-outline-secondary mb-2">Back to Settings</a>
+  <a routerLink="/settings" routerLinkActive="active" style="margin-top: 2px;" class="btn btn-sm btn-outline-secondary mb-2">Back to Settings</a>
 </h1>
 <a routerLink="/locations/add" class="btn btn-sm btn-success mb-2">Add Location</a>
 
@@ -16,24 +15,27 @@
 
 
  <tr *ngFor="let location of locations">
-            <td>{{location.locationid}}</td>
+            <td>{{location.locationName}}</td>
 
             <td style="white-space: nowrap">
-                <a routerLink="edit/{{location.locationid}}" class="btn btn-sm btn-primary me-1">Edit</a>
+                <a routerLink="edit/{{location.id}}" class="btn btn-sm btn-primary me-1">Edit</a>
+
                 <button (click)="deleteLocation(location.id)" class="btn btn-sm btn-danger btn-delete-user" [disabled]="location.isDeleting">
                     <span *ngIf="location.isDeleting" class="spinner-border spinner-border-sm"></span>
                     <span *ngIf="!location.isDeleting">Delete</span>
                 </button>
             </td>
          </tr>
-         <tr >
+         <tr *ngIf="!locations || locations==[]">
             <td colspan="4" class="text-center">
-                <span class="spinner-border spinner-border-lg align-center"></span>
+                <!-- <span
+                 class="spinner-border spinner-border-lg align-center"
+                 > -->
+                 <span>Please Add Location
+                </span>
             </td>
         </tr>
     </tbody>
 </table>
 
 
-<!--
-<app-locations-add-edit></app-locations-add-edit> -->

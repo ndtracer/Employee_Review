@@ -1,25 +1,34 @@
 <body>
 
-
 <h1 style="display: flex; justify-content: center;">Settings</h1>
+
 <hr>
+
 <div class="settingsContainer">
 
-  <!-- <div class="settingsItem">
+
+  <!-- Department Tab -->
+  <div class="settingsItem">
     <button type="button" class="btn  btn-light" (click)="departmentClick()">Departments and Managers</button>
     <div *ngIf="departmentList == true">
-    <div>
-      <br>
-    </div>
+      <div><br></div>
+      <div>
+        <div *ngFor="let department of departments">{{department.departmentName}}</div>
+      </div>
 
-    <div >
-    <button class="addButton">&plus;</button></div>
+      <div><br></div>
+
+      <div style="display: flex; align-items: center; flex-direction: column;">
+        <button  name="addDepartmentBtn" class="addButton" routerLink="/departments" routerLinkActive="active" >&plus;</button>
+        <label style="color: aliceblue;">Add new</label>
+      </div>
+
+    </div>
   </div>
-  </div> -->
 
 <div><br></div>
 
-
+<!-- Location Tab -->
   <div class="settingsItem">
     <button type="button" class="btn  btn-light" (click)="locationClick()">Locations</button>
       <div *ngIf="locationsList == true">
@@ -27,9 +36,8 @@
          <br>
         </div>
 <div>
-  <!-- <app-locations></app-locations> -->
-<!--
-  <app-locations-add-edit></app-locations-add-edit> -->
+<div *ngFor="let location of locations">{{location.locationName}}</div>
+
 </div>
         <div><br></div>
         <div style="display: flex; align-items: center; flex-direction: column;">
@@ -42,7 +50,9 @@
 
   <div><br></div>
 
-  <!-- <div class="settingsItem">
+
+  <!-- Review Form Tab -->
+  <div class="settingsItem">
     <button type="button"  class="btn  btn-light" (click)="formClick()">Review Form Editing</button>
 <div *ngIf="reviewForm == true">
     <div>
@@ -61,6 +71,8 @@
 
   <div><br></div>
 
+
+  <!-- Users Tab -->
   <div class="settingsItem" style="justify-self: center;">
     <button type="button" routerLink="/users" routerLinkActive="active" class="btn  btn-light">Authorized Login Users</button>
 
@@ -70,7 +82,7 @@
 
     <div *ngIf="authorizedLoginUsers == true">
     <button class="addButton" type="button" routerLink="/users/add" routerLinkActive="active" >&plus;</button></div>
-    </div> -->
+    </div>
 
 
 
