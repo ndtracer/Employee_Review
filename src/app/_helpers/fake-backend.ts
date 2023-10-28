@@ -38,9 +38,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return deleteUser();
 
 
-
-                    // case url.endsWith('/employees/authenticate') && method === 'POST':
-                    // return authenticate();
                 case url.endsWith('/employees/register') && method === 'POST':
                     return registerEmployee();
                 case url.endsWith('/employees') && method === 'GET':
@@ -50,8 +47,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 case url.match(/\/employees\/\d+$/) && method === 'PUT':
                     return updateEmployee();
                 case url.match(/\/employees\/\d+$/) && method === 'DELETE':
-                      return deleteEmployee();
-
+                    return deleteEmployee();
 
 
                 case url.endsWith('/locations/register') && method === 'POST':
@@ -66,18 +62,16 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return deleteLocation();
 
 
-                 case url.endsWith('/departments/register') && method === 'POST':
-                      return registerDepartment();
-                  case url.endsWith('/departments') && method === 'GET':
-                      return getDepartments();
-                  case url.match(/\/departments\/\d+$/) && method === 'GET':
-                      return getDepartmentById();
-                  case url.match(/\/departments\/\d+$/) && method === 'PUT':
-                      return updateDepartment();
-                  case url.match(/\/departments\/\d+$/) && method === 'DELETE':
-                      return deleteDepartment();
-
-
+                case url.endsWith('/departments/register') && method === 'POST':
+                    return registerDepartment();
+                case url.endsWith('/departments') && method === 'GET':
+                    return getDepartments();
+                case url.match(/\/departments\/\d+$/) && method === 'GET':
+                    return getDepartmentById();
+                case url.match(/\/departments\/\d+$/) && method === 'PUT':
+                    return updateDepartment();
+                case url.match(/\/departments\/\d+$/) && method === 'DELETE':
+                    return deleteDepartment();
 
 
                 default:
@@ -152,166 +146,136 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         // Employee functions
 
         function registerEmployee() {
-          const employee = body
+            const employee = body
 
-          if (employees.find(x => x.firstName === employee.firstName && x.lastName === employee.lastName)) {
-              return error('This employee "' + employee.firstName  +' ' + employee.lastName + '" has already been submitted')
-          }
+            if (employees.find(x => x.firstName === employee.firstName && x.lastName === employee.lastName)) {
+            return error('This employee "' + employee.firstName  +' ' + employee.lastName + '" has already been submitted')
+            }
 
-          // employee.id = employee.firstName + employee.lastName;
-          employee.id = employees.length ? Math.max(...employees.map(x => x.id)) + 1 : 1;
+            employee.id = employees.length ? Math.max(...employees.map(x => x.id)) + 1 : 1;
 
-          employees.push(employee);
-          localStorage.setItem(employeeKey, JSON.stringify(employees));
-          return ok();
-      }
+            employees.push(employee);
+            localStorage.setItem(employeeKey, JSON.stringify(employees));
+            return ok();
+        }
 
-      function getEmployees() {
-        // if (!isLoggedIn()) return unauthorized();
-        return ok(employees.map(x => employeeDetails(x)));
-    }
+        function getEmployees() {
+            return ok(employees.map(x => employeeDetails(x)));
+        }
 
-    function getEmployeeById() {
-        // if (!isLoggedIn()) return unauthorized();
+        function getEmployeeById() {
+            const employee = employees.find(x => x.id === idFromUrl());
+            return ok(employeeDetails(employee));
+        }
 
-        const employee = employees.find(x => x.id === idFromUrl());
-        return ok(employeeDetails(employee));
-    }
+        function updateEmployee() {
+            let params = body;
+            let employee = employees.find(x => x.id === idFromUrl());
 
-    function updateEmployee() {
-        // if (!isLoggedIn()) return unauthorized();
-console.log("hello")
-        let params = body;
-        let employee = employees.find(x => x.id === idFromUrl());
+            // update and save employee
+            employees.push(employee);
+            Object.assign(employee, params);
 
-        // update and save employee
-        // employees.push(employee);
-        Object.assign(employee, params);
-        console.log(Object)
-        localStorage.setItem(employeeKey, JSON.stringify(employees));
+            localStorage.setItem(employeeKey, JSON.stringify(employees));
 
-        return ok();
-    }
+            return ok();
+        }
 
-    function deleteEmployee() {
-        // if (!isLoggedIn()) return unauthorized();
-        employees = employees.filter(x => x.id !== idFromUrl());
+        function deleteEmployee() {
+            employees = employees.filter(x => x.id !== idFromUrl());
 
-        localStorage.setItem(employeeKey, JSON.stringify(employees));
-        return ok();
-    }
+            localStorage.setItem(employeeKey, JSON.stringify(employees));
+            return ok();
+        }
 
 
 // Location Functions
 
-function registerLocation() {
-  const location = body
-  console.log("Registering Started")
-  if (locations.find(x => x.locationName === location.locationName)) {
-      return error('This location "' + location.locationName +'" has already been submitted')
-  }
+        function registerLocation() {
+            const location = body
+            if (locations.find(x => x.locationName === location.locationName)) {
+            return error('This location "' + location.locationName +'" has already been submitted')
+            }
 
-  // location.id = location.firstName + location.lastName;
-  location.id = locations.length ? Math.max(...locations.map(x => x.id)) + 1 : 1;
+            location.id = locations.length ? Math.max(...locations.map(x => x.id)) + 1 : 1;
 
-  locations.push(location);
-  localStorage.setItem(locationKey, JSON.stringify(locations));
-  return ok();
+            locations.push(location);
+            localStorage.setItem(locationKey, JSON.stringify(locations));
+            return ok();
+        }
 
-}
+        function getLocations() {
+            return ok(locations.map(x => locationDetails(x)));
+        }
 
-function getLocations() {
-// if (!isLoggedIn()) return unauthorized();
-return ok(locations.map(x => locationDetails(x)));
-}
+        function getLocationById() {
+            const location = locations.find(x => x.id === idFromUrl());
+            return ok(locationDetails(location));
+        }
 
-function getLocationById() {
-// if (!isLoggedIn()) return unauthorized();
+        function updateLocation() {
+            let params = body;
+            let location = locations.find(x => x.id === idFromUrl());
 
-const location = locations.find(x => x.id === idFromUrl());
-return ok(locationDetails(location));
-}
+            // update and save location
+            locations.push(location);
+            Object.assign(location, params);
+            localStorage.setItem(locationKey, JSON.stringify(locations));
 
-function updateLocation() {
-// if (!isLoggedIn()) return unauthorized();
-console.log("hello")
-let params = body;
-let location = locations.find(x => x.id === idFromUrl());
+            return ok();
+        }
 
-// update and save location
-// locations.push(location);
-Object.assign(location, params);
-console.log(Object)
-localStorage.setItem(locationKey, JSON.stringify(locations));
+        function deleteLocation() {
+            locations = locations.filter(x => x.id !== idFromUrl());
 
-return ok();
-}
-
-function deleteLocation() {
-// if (!isLoggedIn()) return unauthorized();
-locations = locations.filter(x => x.id !== idFromUrl());
-
-localStorage.setItem(locationKey, JSON.stringify(locations));
-return ok();
-}
-
+            localStorage.setItem(locationKey, JSON.stringify(locations));
+            return ok();
+        }
 
 
 // Department Functions
 
-function registerDepartment() {
-  const department = body
-  console.log("Registering Started")
-  if (departments.find(x => x.departmentName === department.departmentName)) {
-      return error('This department "' + department.departmentName +'" has already been submitted')
-  }
+        function registerDepartment() {
+            const department = body
+            if (departments.find(x => x.departmentName === department.departmentName)) {
+            return error('This department "' + department.departmentName +'" has already been submitted')
+            }
 
-  // department.id = department.firstName + department.lastName;
-  department.id = departments.length ? Math.max(...departments.map(x => x.id)) + 1 : 1;
+            department.id = departments.length ? Math.max(...departments.map(x => x.id)) + 1 : 1;
 
-  departments.push(department);
-  localStorage.setItem(departmentKey, JSON.stringify(departments));
-  return ok();
+            departments.push(department);
+            localStorage.setItem(departmentKey, JSON.stringify(departments));
+            return ok();
 
-}
+        }
 
-function getDepartments() {
-// if (!isLoggedIn()) return unauthorized();
-return ok(departments.map(x => departmentDetails(x)));
-}
+        function getDepartments() {
+            return ok(departments.map(x => departmentDetails(x)));
+        }
 
-function getDepartmentById() {
-// if (!isLoggedIn()) return unauthorized();
+        function getDepartmentById() {
+            const department = departments.find(x => x.id === idFromUrl());
+            return ok(departmentDetails(department));
+        }
 
-const department = departments.find(x => x.id === idFromUrl());
-return ok(departmentDetails(department));
-}
+        function updateDepartment() {
+            let params = body;
+            let department = departments.find(x => x.id === idFromUrl());
 
-function updateDepartment() {
-// if (!isLoggedIn()) return unauthorized();
-console.log("hello")
-let params = body;
-let department = departments.find(x => x.id === idFromUrl());
+            // update and save department
+            departments.push(department);
+            Object.assign(department, params);
+            localStorage.setItem(departmentKey, JSON.stringify(departments));
 
-// update and save department
-// departments.push(department);
-Object.assign(department, params);
-console.log(Object)
-localStorage.setItem(departmentKey, JSON.stringify(departments));
+            return ok();
+        }
 
-return ok();
-}
+        function deleteDepartment() {
+            departments = departments.filter(x => x.id !== idFromUrl());
 
-function deleteDepartment() {
-// if (!isLoggedIn()) return unauthorized();
-departments = departments.filter(x => x.id !== idFromUrl());
-
-localStorage.setItem(departmentKey, JSON.stringify(departments));
-return ok();
-}
-
-
-
+            localStorage.setItem(departmentKey, JSON.stringify(departments));
+            return ok();
+        }
 
 
         // helper functions
@@ -337,18 +301,18 @@ return ok();
         }
 
         function employeeDetails(employee: any) {
-          const { id, firstName, lastName, jobTitle, department, manager, location } = employee;
-          return { id, firstName, lastName, jobTitle, department, manager, location};
-      }
+            const { id, firstName, lastName, jobTitle, department, manager, location } = employee;
+            return { id, firstName, lastName, jobTitle, department, manager, location};
+        }
 
         function locationDetails(location: any) {
-          const { id, locationName } = location;
-          return { id, locationName };
+            const { id, locationName } = location;
+            return { id, locationName };
         }
 
         function departmentDetails(department: any) {
-          const { id, departmentName, manager } = department;
-          return { id, departmentName, manager};
+            const { id, departmentName, manager } = department;
+            return { id, departmentName, manager};
         }
 
 

@@ -1,6 +1,5 @@
 import { NavbarComponent } from './navbar/navbar.component';
 
-
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -15,9 +14,6 @@ import { AppComponent } from './app.component';
 import { AlertComponent } from './_components';
 import { HomeComponent } from './home';
 
-// import { UniquePipe } from './_pipes/employee-locations.pipe';
-// import { LocationsModule } from './settings/locations/locations.module';
-
 
 @NgModule({
     imports: [
@@ -26,15 +22,12 @@ import { HomeComponent } from './home';
         ReactiveFormsModule,
         HttpClientModule,
         AppRoutingModule,
-        // LocationsModule
     ],
     declarations: [
         AppComponent,
         AlertComponent,
         HomeComponent,
         NavbarComponent,
-
-        // UniquePipe,
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

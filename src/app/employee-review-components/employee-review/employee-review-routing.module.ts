@@ -8,8 +8,6 @@ const routes: Routes = [
     path: '', component: EmployeeReviewComponent,
     children: [
       { path: '', component: EmployeeReviewComponent },
-      // { path: 'add', component: EmployeeAddEditComponent },
-      // { path: 'edit/:id', component: EmployeeAddEditComponent}
     ]
   }
 ];

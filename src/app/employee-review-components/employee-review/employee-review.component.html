@@ -36,62 +36,14 @@
       <button>All Locations</button>
     </div>
 
-      <!-- <div *ngFor="let department of employees | unique">
-        <div>Department: {{this.department.department}}</div> -->
-        <!-- <div>Manager: {{this.department.manager}}</div>
+      <div *ngFor="let employee of employees | unique: 'department'">
+        <div>{{this.employee.department}}</div>
+        <!-- <div>Manager: {{this.department.manager}}</div> -->
 
-      </div> -->
+      </div>
 
       <h2 class="h2"></h2>
 
 
-      <!-- <menu id="worksiteAddRemMenu">
-          <button type="button" name="worksiteAddButton" id="worksiteAddButton">&plus;</button>
-          <form action="" id="worksiteAdd" class="worksiteAddForm">
-          <input type="text" id="worksiteAddTitle" placeholder="Add Worksite Name">
-          <div class="cancelSubmitButtons">
-          <button type="button" id ="worksiteAddCancel">Cancel</button>
-          <button type="submit" id="worksiteAddSubmit">Submit</button></div>
-          </form>
-      </menu> -->
-
-
-
-      <!-- <button type="button" class="AddEditRemoveBtn">Add, Edit, Remove</button> -->
-
-      <!-- <button type="button"
-      id="worksiteEditBtn"
-      id="worksiteEditButton">i</button>
-
-      <button type="submit" id="worksiteRemBtn" id="worksiteRemButton">&minus;</button> -->
-
-
   </h2>
 </main>
-
-  <!-- <h2 class="h2" id="Dept-Managerh2">
-      Please Select a Department/Manager
-
-      <ul id="DepartmentPlacement">
-
-
-      </ul>
-
-
-      <button type="button" id="deptManagerAddRemButton">Add, Edit, Remove</button>
-  </h2>
-
-
-
-  <h2 class="h2" id="Employeeh2">
-      Please Select an Employee
-
-      <ul id="EmployeePlacement">
-
-
-      </ul>
-
-
-
-      <button type="button" id="employeeAddRemButton">Add, Edit, Remove</button>
-   </h2> -->

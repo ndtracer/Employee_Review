@@ -1,13 +1,7 @@
 import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { first } from 'rxjs/operators';
 
-// import { Employee } from 'src/app/_models';
-// import { UniquePipe } from 'src/app/_pipes/employee-locations.pipe';
-
-
 import { EmployeeService } from 'src/app/_services';
-
-
 
 @Component({
   selector: 'app-employee-review',

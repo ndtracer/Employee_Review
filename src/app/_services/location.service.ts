@@ -24,11 +24,8 @@ export class LocationService {
     return this.locationSubject.value;
   }
 
-
   register(location: Location) {
-    console.log("This is the next step")
     return this.http.post(`${environment.apiUrl}/locations/register`, location);
-
   }
 
   getAll() {
@@ -36,32 +33,26 @@ export class LocationService {
   }
 
   getById(id: string) {
-
     return this.http.get<Location>(`${environment.apiUrl}/locations/${id}`);
   }
 
   update(id: string, params: any) {
-
     return this.http.put(`${environment.apiUrl}/locations/${id}`, params)
     .pipe(map(x => {
-
         // update local storage
         const location = { ...this.locationValue, ...params };
         localStorage.setItem('location', JSON.stringify(location));
 
         // publish updated location to subscribers
         this.locationSubject.next(location);
-
       return x;
     }));
   }
 
   delete(id: string) {
-
     return this.http.delete
     (`${environment.apiUrl}/locations/${id}`)
     .pipe(map(x => {
-
       return x;
     }));
   }

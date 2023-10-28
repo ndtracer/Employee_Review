@@ -2,14 +2,14 @@
   <div class="navbar_div">
     <div class="navbarBtnDiv">
 
-<!-- Need Link to Inventory Component Page -->
-      <div class="borderDiv1"><button class="navbarBtn1"><img class="navbar-icon" src="/assets/images/inventory-icon.png" alt="inventory-icon" routerLink="/inventory" routerLinkActive="active">Inventory</button></div>
+<!-- Inventory Component Page -->
+      <div class="borderDiv1" routerLink="/inventory" routerLinkActive="active"><a class="navbarBtn1"><img class="navbar-icon" src="/assets/images/inventory-icon.png" alt="inventory-icon">Inventory</a></div>
 
-<!-- Need Link to TrailerInventory Component Page -->
-      <div class="borderDiv2"><button class="navbarBtn2"><img class="navbar-icon" src="/assets/images/truck-icon.png" alt="truck-icon" routerLink="/trailer-inventory" routerLinkActive="active">Trailers</button></div>
+<!-- TrailerInventory Component Page -->
+      <div class="borderDiv2" routerLink="/trailer-inventory" routerLinkActive="active"><a class="navbarBtn2"><img class="navbar-icon" src="/assets/images/truck-icon.png" alt="truck-icon" >Trailers</a></div>
 
-<!-- Need Link to Maintenance Component Page -->
-      <div class="borderDiv1"><button class="navbarBtn1"><img class="navbar-icon" src="/assets/images/maintenance-icon.png" alt="maintenance-icon" routerLink="/maintenance" routerLinkActive="active">Maintenance</button></div>
+<!-- Maintenance Component Page -->
+      <div class="borderDiv1" routerLink="/maintenance" routerLinkActive="active"><a class="navbarBtn1"><img class="navbar-icon" src="/assets/images/maintenance-icon.png" alt="maintenance-icon" >Maintenance</a></div>
     </div>
 
       <h1 class="h1">
@@ -22,28 +22,25 @@
 
       </h1>
 
-    <div class="navbarBtnDiv">
-      <div class="borderDiv1"><button class="navbarBtn1"><img class="navbar-icon" src="/assets/images/employees-icon.png" alt="employees-icon" routerLink="/employees" routerLinkActive="active">Employees</button></div>
+      <div class="navbarBtnDiv">
 
-      <div class="borderDiv2"><button class="navbarBtn2"><img class="navbar-icon" src="/assets/images/employee-review-icon.png" alt="employee-review-icon" routerLink="/employee-review" routerLinkActive="active">Employee Review</button></div>
+        <!-- Employee Component Page -->
+      <div class="borderDiv1" routerLink="/employees" routerLinkActive="active"><a class="navbarBtn1"><img class="navbar-icon" src="/assets/images/employees-icon.png" alt="employees-icon">Employees</a></div>
 
+<!-- Employee Review Component Page -->
+      <div class="borderDiv2" routerLink="/employee-review" routerLinkActive="active"><a class="navbarBtn2"><img class="navbar-icon" src="/assets/images/employee-review-icon.png" alt="employee-review-icon">Evals</a></div>
 
-      <div class="borderDiv1"><button class="navbarBtn1"><img class="navbar-icon" src="/assets/images/settings-icon.png" alt="settings-icon" routerLink="/settings" routerLinkActive="active">settings</button></div>
+<!-- Settings Component Page -->
+      <div class="borderDiv1" routerLink="/settings" routerLinkActive="active"><a class="navbarBtn1"><img class="navbar-icon" src="/assets/images/settings-icon.png" alt="settings-icon" >settings</a></div>
     </div>
   </div>
 
   <h3 class="logout-h3">
-    <!-- <div><div class="logoutL"></div>
-    <div class="logoutL2"></div>
-  </div> -->
-    <!-- <div class="top_spacel"></div> -->
-    <div class="return_h3_divl"></div>
+    <div class="leftDiv"></div>
     <div class="logoutDiv">
     <button class="logoutBtn" type="button" (click)="logout()">Logout</button>
     </div>
-    <div class="return_h3_divr"></div>
-    <!-- <div class="top_spacer"></div>
-    <div class="logoutR"></div> -->
+    <div class="rightDiv"></div>
   </h3>
 
 <h3 class="bottom-space"></h3>

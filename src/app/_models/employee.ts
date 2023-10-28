@@ -6,7 +6,4 @@ export class Employee {
   department?: string;
   manager?: string;
   location?: string;
-
-
-
 }

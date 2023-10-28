@@ -1,24 +1,10 @@
-<!-- <app-login-page></app-login-page> -->
-
-<!-- <app-employee-review></app-employee-review> -->
-
-
-
 <!-- nav -->
 <app-navbar *ngIf="user"></app-navbar>
-  <!-- <div class="navbar-nav">
-      <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-      <a class="nav-item nav-link" routerLink="/users" routerLinkActive="active">Users</a>
-      <button class="btn btn-link nav-item nav-link" (click)="logout()">Logout</button>
-  </div> -->
-
 
 <!-- main app container -->
-
 <div class="app-container" [ngClass]="{ 'bg-light': user }" style="background-color: #1a74a3;">
   <alert></alert>
   <span class=".mainBackground"></span>
   <router-outlet></router-outlet>
-
 </div>
 

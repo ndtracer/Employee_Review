@@ -26,9 +26,8 @@ export class DepartmentService {
 
 
   register(department: Department) {
-    console.log("This is the next step")
-    return this.http.post(`${environment.apiUrl}/departments/register`, department);
 
+    return this.http.post(`${environment.apiUrl}/departments/register`, department);
   }
 
   getAll() {
@@ -36,32 +35,26 @@ export class DepartmentService {
   }
 
   getById(id: string) {
-
     return this.http.get<Department>(`${environment.apiUrl}/departments/${id}`);
   }
 
   update(id: string, params: any) {
-
     return this.http.put(`${environment.apiUrl}/departments/${id}`, params)
     .pipe(map(x => {
-
         // update local storage
         const department = { ...this.departmentValue, ...params };
         localStorage.setItem('department', JSON.stringify(department));
 
         // publish updated department to subscribers
         this.departmentSubject.next(department);
-
       return x;
     }));
   }
 
   delete(id: string) {
-
     return this.http.delete
     (`${environment.apiUrl}/departments/${id}`)
     .pipe(map(x => {
-
       return x;
     }));
   }
