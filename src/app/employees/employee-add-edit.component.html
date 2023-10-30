@@ -40,7 +40,6 @@
               <option value="Unassigned">Unassigned</option>
               <option value={{department.departmentName}} *ngFor="let department of departments">{{department.departmentName}}</option>
             </select>
-            <!-- <input type="text" formControlName="department" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['department'].errors }" /> -->
           </label>
             <div *ngIf="submitted && f['department'].errors" class="invalid-feedback">
                 <div *ngIf="f['department'].errors['required']">Department is required</div>
@@ -50,7 +49,7 @@
 
         <div class="mb-3 col">
           <label class="form-label">Manager
-          <input [disabled]="submitting" type="text" formControlName="manager" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['manager'].errors }" *ngFor="let department of departments" placeholder={{this.department.manager}} /></label>
+          <input  type="text" formControlName="manager" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['manager'].errors }" value="{{form.controls['department'].value.manager}}"/></label>
           <div *ngIf="submitted && f['manager'].errors" class="invalid-feedback">
               <div *ngIf="f['manager'].errors['required']">Manager is required</div>
           </div>
