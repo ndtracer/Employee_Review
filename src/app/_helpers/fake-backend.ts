@@ -9,11 +9,13 @@ const usersKey = 'login-users';
 const employeeKey = 'employees';
 const locationKey = 'locations';
 const departmentKey = 'departments';
+const trailerKey = 'trailers';
 
 let users: any[] = JSON.parse(localStorage.getItem(usersKey)!) || [];
 let employees: any [] = JSON.parse(localStorage.getItem(employeeKey)!) || [];
 let locations: any[] = JSON.parse(localStorage.getItem(locationKey)!) || [];
 let departments: any[] = JSON.parse(localStorage.getItem(departmentKey)!) || [];
+let trailers: any[] = JSON.parse(localStorage.getItem(trailerKey)!) || [];
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -73,6 +75,17 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 case url.match(/\/departments\/\d+$/) && method === 'DELETE':
                     return deleteDepartment();
 
+
+                case url.endsWith('/trailers/register') && method === 'POST':
+                    return registerTrailer();
+                case url.endsWith('/trailers') && method === 'GET':
+                    return getTrailer();
+                case url.match(/\/trailers\/\d+$/) && method === 'GET':
+                    return getTrailerById();
+                case url.match(/\/trailers\/\d+$/) && method === 'PUT':
+                    return updateTrailer();
+                case url.match(/\/trailers\/\d+$/) && method === 'DELETE':
+                    return deleteTrailer();
 
                 default:
                     // pass through any requests not handled above
@@ -278,6 +291,52 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         }
 
 
+        // Trailer functions
+
+
+        function registerTrailer() {
+          const trailer = body
+          if (trailers.find(x => x.trailerName === trailer.trailerName)) {
+          return error('This trailer "' + trailer.trailerName +'" has already been submitted')
+          }
+
+          trailer.id = trailers.length ? Math.max(...trailers.map(x => x.id)) + 1 : 1;
+
+          trailers.push(trailer);
+          localStorage.setItem(trailerKey, JSON.stringify(trailers));
+          return ok();
+
+      }
+
+      function getTrailer() {
+          return ok(trailers.map(x => trailerDetails(x)));
+      }
+
+      function getTrailerById() {
+          const trailer = trailers.find(x => x.id === idFromUrl());
+          return ok(trailerDetails(trailer));
+      }
+
+      function updateTrailer() {
+          let params = body;
+          let trailer = trailers.find(x => x.id === idFromUrl());
+
+          // update and save trailer
+          trailers.push(trailer);
+          Object.assign(trailer, params);
+          localStorage.setItem(trailerKey, JSON.stringify(trailers));
+
+          return ok();
+      }
+
+      function deleteTrailer() {
+          trailers = trailers.filter(x => x.id !== idFromUrl());
+
+          localStorage.setItem(trailerKey, JSON.stringify(trailers));
+          return ok();
+      }
+
+
         // helper functions
 
         function ok(body?: any) {
@@ -314,6 +373,13 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             const { id, departmentName, manager } = department;
             return { id, departmentName, manager};
         }
+
+        function trailerDetails(location: any) {
+          const { id, trailerName, isFull, isReadyToMove, currentLocation, nextLocation,
+            assignedDriver} = location;
+          return { id, trailerName, isFull, isReadyToMove, currentLocation, nextLocation,
+            assignedDriver};
+      }
 
 
         function isLoggedIn() {

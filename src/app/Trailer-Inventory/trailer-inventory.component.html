@@ -1,1 +1,60 @@
 <p>trailer-inventory works!</p>
+<!-- Contains both sides of the component page -->
+<div class="mainContainer">
+
+
+  <!-- Left Side 60% of page -->
+  <div class="leftContainerDiv">
+
+    <!-- div for search bar/ filter btns -->
+    <div class="searchDiv">
+      <label for="searchbar">Search</label>
+      <input type="text" name="searchbar">
+      <br>
+      <button>Filter by</button>
+    </div>
+
+
+
+    <!-- List of all Trailers (for each trailer) -->
+    <div>
+      <h2>Trailers</h2>
+      <div *ngFor="let trailer of trailers">
+
+      </div>
+    </div>
+          <!-- Each Trailer Needs the Following -->
+
+          <!-- Box containing Trailer info -->
+            <!-- Box Contains: Trailer #, If Trailer is full/empty, current location, next location, and ready to pull -->
+
+          <!-- Box needs Dynamic Border that changes if ready to pull -->
+
+          <!-- Buttons Alongside to edit info (locations), change status of full/empty, and change status of Ready to Pull -->
+  </div>
+
+
+  <!-- Right Side 40% of page -->
+  <div class="rightContainerDiv">
+    <!-- Possible key/legend for +,-,i buttons -->
+    <h4>Legend:
+      <br>+ = Add new
+      <br>- = Remove Trailer
+      <br>i = Edit Trailer Info
+    </h4>
+
+
+    <!-- List of all trailers (Simple List) -->
+    <div *ngFor="let trailer of trailers">
+      <!-- Each Trailer has - and i buttons -->
+      <!-- End has + button -->
+      <!-- + and i btns lead to separate add/edit page -->
+      <button>&minus;</button>
+      <div>
+        {{trailer.trailerName}}
+      </div>
+      <button>i</button>
+    </div>
+    <button>&plus;</button>
+  </div>
+</div>
