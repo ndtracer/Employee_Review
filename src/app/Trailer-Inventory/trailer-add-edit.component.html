@@ -1,0 +1,25 @@
+<h1>{{title}}</h1>
+<form *ngIf="!loading" [formGroup]="form" id="trailers" (ngSubmit)="onSubmit()">
+    <div class="row">
+
+      <div class="mb-3 col">
+        <label class="form-label">Trailer Identification Name/Number
+        <input type="text" formControlName="trailerName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['trailerName'].errors }" /></label>
+        <div *ngIf="submitted && f['trailerName'].errors" class="invalid-feedback">
+            <div *ngIf="f['trailerName'].errors['required']">Trailer ID is required</div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="mb-3">
+        <button [disabled]="submitting" class="btn btn-primary">
+            <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
+            Save
+        </button>
+        <a routerLink="/settings" class="btn btn-link">Cancel</a>
+    </div>
+</form>
+<div *ngIf="loading" class="text-center m-5">
+    <span class="spinner-border spinner-border-lg align-center"></span>
+</div>

@@ -35,12 +35,8 @@ export class TrailerAddEditComponent implements OnInit {
 
     // form with validation rules
     this.form = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      jobTitle: ['', Validators.required],
-      department: ['', Validators.required],
-      manager: ['', Validators.required],
-      location: ['', Validators.required],
+      trailerName: ['', Validators.required],
+      currentLocation: ['', Validators.required],
 
     });
 
