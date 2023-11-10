@@ -6,7 +6,7 @@ import { Employee } from "../_models";
 export type FilterByT = 'location' | 'department'
 @Pipe({
   name: 'unique',
-  // pure: false
+  pure: true
 })
 export class UniquePipe implements PipeTransform {
 
