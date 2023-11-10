@@ -1,9 +1,9 @@
-.cancelSubmitButtons {
+/* .cancelSubmitButtons {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-}
-
+} */
+/*
 #worksiteAddRemMenu {
   display: flex;
   justify-content: center;
@@ -12,38 +12,32 @@
   padding: 0px;
   margin: 4px;
   padding: 4px;
-}
-
+} */
+/*
 #worksiteAddTitle {
   display: none;
   margin: 4px;
 
-}
-
-.cancelSubmitBtns {
+} */
+/* .cancelSubmitBtns {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 
-}
-
-#worksiteAddCancel {
+} */
+/* #worksiteAddCancel {
   display: none;
   align-items: center;
   width: 60px;
   height: 23px;
   margin: 4px;
-}
-
-#worksiteAddSubmit {
+} */
+/* #worksiteAddSubmit {
   display: none;
   margin: 4px;
-
-
-}
-
-#worksiteRemSubmit {
+} */
+/* #worksiteRemSubmit {
   display: none;
 }
 
@@ -65,9 +59,8 @@
   justify-content: center;
   align-self: start;
   max-width: 30vw;
-}
-
-#wrkstbtn {
+} */
+/* #wrkstbtn {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -84,19 +77,16 @@
   font-size: medium;
   font-family:sans-serif;
   position: relative;
-
-}
-#wrkstbtn:hover {
+} */
+/* #wrkstbtn:hover {
   box-shadow: 8px 8px 2px 1px rgba(0,0,0, .4);
   transition-duration: .3s;
   background-color: #006b3d;
   color: #f2f3f5;
-}
-
-#dptbtn {
+} */
+/* #dptbtn {
   border-color: #00308f;
   border-radius: 10px;
-  /* box-shadow: 8px 8px 2px 1px rgba(0,0,0, .4); */
   width: 99%;
   height: 50px;
   margin: 2px;
@@ -105,19 +95,17 @@
   table-layout: fixed;
   font-size: medium;
   font-family:sans-serif;
-
-}
-#dptbtn:hover {
+} */
+/* #dptbtn:hover {
   box-shadow: 8px 8px 2px 1px rgba(0,0,0, .4);
   transition-duration: .4s;
   background-color: #006b3d;
   color: #f2f3f5;
-}
-
-#empbtn {
+} */
+/* #empbtn {
   border-color: #00308f;
   border-radius: 10px;
-  /* box-shadow: 8px 8px 2px 1px rgba(0,0,0, .4); */
+
   width: 99%;
   height: 50px;
   margin: 2px;
@@ -126,14 +114,13 @@
   table-layout: fixed;
   font-size: medium;
   font-family:sans-serif;
-
-}
-#empbtn:hover {
+} */
+/* #empbtn:hover {
   box-shadow: 8px 8px 2px 1px rgba(0,0,0, .4);
   transition-duration: .4s;
   background-color: #006b3d;
   color: #f2f3f5;
-}
+} */
 
 #WorksitePlacement {
   display: flex;
@@ -392,4 +379,20 @@
 
   padding: 40px;
   box-shadow: 12px 12px 5px #3a3a3a;
+}
+
+.selectBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3px;
+  width: 90%;
+  margin: 5px;
+  border-radius: 5px;
+}
+.selectBtn:hover {
+  box-shadow: 8px 8px 2px 1px rgba(0,0,0, .4);
+  transition-duration: .3s;
+  background-color: #006b3d;
+  color: #f2f3f5;
 }

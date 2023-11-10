@@ -50,7 +50,7 @@ export class DepartmentsAddEditComponent implements OnInit {
           this.form.patchValue(x);
           this.loading = false;
         });
-        console.log("this one", this.departmentService.getById(this.id))
+
       }
   }
 
@@ -69,7 +69,7 @@ export class DepartmentsAddEditComponent implements OnInit {
     }
 
     this.submitting = true;
-    console.log("hello")
+
     this.saveDepartment()
       .pipe(first())
       .subscribe({

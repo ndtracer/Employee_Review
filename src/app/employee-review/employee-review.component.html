@@ -27,21 +27,24 @@
   <h2 class="h2">
     Please Select a {{titleId}}
 
+
+    <div *ngFor="let employee of employees | unique: 'department'">
+      <div>{{this.employee.department}}</div>
+      <!-- <div>Manager: {{this.department.manager}}</div> -->
+
+    </div>
+
     <div>
 
       <div id="WorksitePlacement" *ngFor="let employee of employees | unique: 'location' ">
 
         <button class="selectBtn">{{employee.location}}</button>
       </div>
-      <button>All Locations</button>
-    </div>
+      <div id="WorksitePlacement">
 
-      <div *ngFor="let employee of employees | unique: 'department'">
-        <div>{{this.employee.department}}</div>
-        <!-- <div>Manager: {{this.department.manager}}</div> -->
-
+        <button class="selectBtn">All Locations</button>
       </div>
-
+    </div>
       <h2 class="h2"></h2>
 
 
