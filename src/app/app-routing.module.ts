@@ -8,7 +8,7 @@ import { AuthGuard } from './_helpers';
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 const usersModule = () => import('./users/users.module').then(x => x.UsersModule);
 const employeesModule = () => import('./employees/employees.module').then(x => x.EmployeesModule);
-const employeeReviewModule = () => import('./employee-review-components/employee-review/employee-review.module').then(x => x.EmployeeReviewModule);
+const employeeReviewModule = () => import('./employee-review/employee-review.module').then(x => x.EmployeeReviewModule);
 const inventoryModule = () => import('./inventory/inventory/inventory.module').then(x => x.InventoryModule);
 const maintenanceModule = () => import('./maintenance/maintenance.module').then(x => x.MaintenanceModule);
 const trailerInventoryModule = () => import('./trailer-Inventory/trailer-inventory.module').then(x => x.TrailerInventoryModule);
