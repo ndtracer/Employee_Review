@@ -7,7 +7,25 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { User } from '../_models';
 
+
+
+
+
+
 @Injectable({ providedIn: 'root' })
+
+// export interface AuthResponseData {
+//   kind: string;
+//   idToken: string;
+//   email: string;
+//   refreshToken: string;
+//   expiresIn: string;
+//   localId: string;
+//   registered?: boolean;
+// }
+// return this.http.post<AuthResponseData>()
+
+
 export class AccountService {
   private userSubject: BehaviorSubject<User | null>;
   public user: Observable<User | null>;
@@ -41,8 +59,14 @@ export class AccountService {
     this.router.navigate(['/account/login']);
   }
 
+  // register(user: User) {
+  //   return this.http.post(`${environment.apiUrl}/users/register`, user);
+  // }
+
   register(user: User) {
-    return this.http.post(`${environment.apiUrl}/users/register`, user);
+    let email = user.email
+    let password = user.password
+    return this.http.post(environment.SIGN_UP_URL + environment.AUTH_API_KEY, {email, password, returnSecureToken: true})
   }
 
   getAll() {
@@ -81,3 +105,6 @@ export class AccountService {
     }));
   }
 }
+
+
+

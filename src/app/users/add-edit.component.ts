@@ -30,6 +30,7 @@ export class AddEditComponent implements OnInit {
       this.form = this.formBuilder.group({
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
+        email: ['', [Validators.email, Validators.required]],
         username: ['', Validators.required],
         // password only required in add mode
         password: ['', [Validators.minLength(6), ...(!this.id ? [Validators.required] : [])]]
