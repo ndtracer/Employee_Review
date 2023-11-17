@@ -25,7 +25,7 @@ export class LocationService {
   }
 
   register(location: Location) {
-    return this.http.post(`${environment.apiUrl}/locations/register`, location);
+    return this.http.post(`${environment.apiUrl}/locations`, location);
   }
 
   getAll() {

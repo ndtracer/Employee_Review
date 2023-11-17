@@ -12,19 +12,19 @@ import { User } from '../_models';
 
 
 
-@Injectable({ providedIn: 'root' })
 
-// export interface AuthResponseData {
-//   kind: string;
-//   idToken: string;
-//   email: string;
-//   refreshToken: string;
-//   expiresIn: string;
-//   localId: string;
-//   registered?: boolean;
-// }
+export interface AuthResponseData {
+  kind: string;
+  idToken: string;
+  email: string;
+  refreshToken: string;
+  expiresIn: string;
+  localId: string;
+  registered?: boolean;
+};
 // return this.http.post<AuthResponseData>()
 
+@Injectable({ providedIn: 'root' })
 
 export class AccountService {
   private userSubject: BehaviorSubject<User | null>;
@@ -42,8 +42,8 @@ export class AccountService {
     return this.userSubject.value;
   }
 
-  login(username: string, password: string) {
-    return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { username, password})
+  login(email: string, password: string) {
+    return this.http.post(`${environment.SIGN_IN_URL + environment.AUTH_API_KEY}`, { email, password, returnSecureToken: true})
     .pipe(map(user => {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
       localStorage.setItem('user', JSON.stringify(user));
@@ -67,6 +67,7 @@ export class AccountService {
     let email = user.email
     let password = user.password
     return this.http.post(environment.SIGN_UP_URL + environment.AUTH_API_KEY, {email, password, returnSecureToken: true})
+    // this.http.post(`${environment.apiUrl}/users/register`, user)
   }
 
   getAll() {
@@ -74,7 +75,7 @@ export class AccountService {
   }
 
   getById(id: string) {
-    console.log("user:", this.http.get<User>(`${environment.apiUrl}/users/${id}`))
+    // console.log("user:", this.http.get<User>(`${environment.apiUrl}/users/${id}`))
     return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
   }
 
