@@ -23,10 +23,10 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
       this.form = this.formBuilder.group({
-        firstName: ['', Validators.required],
-        lastName: ['', Validators.required],
+        // firstName: ['', Validators.required],
+        // lastName: ['', Validators.required],
         email: ['', [Validators.email, Validators.required]],
-        username: ['', Validators.required],
+        // username: ['', Validators.required],
         password: ['', [Validators.required, Validators.minLength(6)]]
       });
   }
@@ -35,6 +35,7 @@ export class RegisterComponent implements OnInit {
   get f() { return this.form.controls; }
 
   onSubmit() {
+
     this.submitted = true;
 
     // reset alerts on submit
@@ -46,9 +47,9 @@ export class RegisterComponent implements OnInit {
     }
 
     this.loading = true;
-    this.accountService.register(this.form.value)
-
-    this.authObsv.subscribe({
+    this.accountService.register(this.form.value.email, this.form.value.password)
+    .pipe(first())
+    .subscribe({
       next: () => {
         this.alertService.success('Registration successful', {keepAfterRouteChange: true});
         this.router.navigate(['../login'], { relativeTo: this.route });

@@ -19,15 +19,15 @@ const departmentsModule = () => import('./settings/departments/departments.modul
 const routes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'users', loadChildren: usersModule, canActivate: [AuthGuard] },
-    { path: 'account', loadChildren: accountModule },
+    { path: 'account', loadChildren: accountModule, canActivate: [AuthGuard]  },
     { path: 'employees', loadChildren: employeesModule, canActivate: [AuthGuard] },
-    { path: 'inventory', loadChildren: inventoryModule },
-    { path: 'maintenance', loadChildren: maintenanceModule },
-    { path: 'trailer-inventory', loadChildren: trailerInventoryModule },
-    { path: 'employee-review', loadChildren: employeeReviewModule },
-    { path: 'settings', loadChildren: settingsModule },
-    { path: 'locations', loadChildren: locationsModule},
-    { path: 'departments', loadChildren: departmentsModule},
+    { path: 'inventory', loadChildren: inventoryModule, canActivate: [AuthGuard]  },
+    { path: 'maintenance', loadChildren: maintenanceModule, canActivate: [AuthGuard]  },
+    { path: 'trailer-inventory', loadChildren: trailerInventoryModule, canActivate: [AuthGuard]  },
+    { path: 'employee-review', loadChildren: employeeReviewModule, canActivate: [AuthGuard]  },
+    { path: 'settings', loadChildren: settingsModule, canActivate: [AuthGuard]  },
+    { path: 'locations', loadChildren: locationsModule, canActivate: [AuthGuard] },
+    { path: 'departments', loadChildren: departmentsModule, canActivate: [AuthGuard] },
 
 
     // otherwise redirect to home

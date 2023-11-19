@@ -43,9 +43,9 @@ export class LoginComponent implements OnInit {
     }
 
     this.loading = true;
-    this.accountService.login(this.f['email'].value, this.f['password'].value)
-
-    this.authObsv.subscribe({
+    this.accountService.login(this.form.value.email, this.form.value.password)
+    .pipe(first())
+    .subscribe({
       next: () => {
         // get return url from query parameters or default to home page
         const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';

@@ -2,7 +2,7 @@
   <h4 class="card-header">Register</h4>
   <div class="card-body">
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
-          <div class="mb-3">
+          <!-- <div class="mb-3">
               <label class="form-label">First Name</label>
               <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }" />
               <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
@@ -15,7 +15,7 @@
               <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
                   <div *ngIf="f['lastName'].errors['required']">Last Name is required</div>
               </div>
-          </div>
+          </div> -->
           <div class="mb-3">
             <label class="form-label">Email</label>
             <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
@@ -23,13 +23,13 @@
                 <div *ngIf="f['email'].errors['required'] || f['email'].errors['email']">Please enter a valid email</div>
             </div>
         </div>
-          <div class="mb-3">
+          <!-- <div class="mb-3">
               <label class="form-label">Username</label>
               <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" />
               <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
                   <div *ngIf="f['username'].errors['required']">Username is required</div>
               </div>
-          </div>
+          </div> -->
           <div class="mb-3">
               <label class="form-label">Password</label>
               <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" />
@@ -44,6 +44,7 @@
                   Register
               </button>
               <a routerLink="../login" class="btn btn-link">Cancel</a>
+              <a routerLink="../register-user" class="btn btn-link">next step</a>
           </div>
       </form>
   </div>

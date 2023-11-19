@@ -26,12 +26,16 @@ export interface AuthResponseData {
 };
 
 
+
 @Injectable({ providedIn: 'root' })
 
 export class AccountService {
-  private userSubject: BehaviorSubject<User | null>;
+  public isLoggedIn: boolean;
+   userSubject = new BehaviorSubject<User | null>(null);
   public user: Observable<User | null>;
   private tokenExpTimer: any;
+
+
 
   constructor(
     private router: Router,
@@ -39,6 +43,7 @@ export class AccountService {
   ) {
     this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('user')!));
     this.user = this.userSubject.asObservable();
+
   }
 
   public get userValue() {
@@ -46,21 +51,23 @@ export class AccountService {
   }
 
   login(email: string, password: string) {
-    const authRes = this.http.post<AuthResponseData>(`${environment.SIGN_IN_URL + environment.AUTH_API_KEY}`, { email, password, returnSecureToken: true})
+    return this.http.post<AuthResponseData>(`${environment.SIGN_IN_URL + environment.AUTH_API_KEY}`, { email, password, returnSecureToken: true})
     .pipe(tap((res) => {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
       const { email, localId, idToken, expiresIn} = res;
       this.handleAuth(email, localId, idToken, +expiresIn);
-      // localStorage.setItem('user', JSON.stringify(user));
-      // this.userSubject.next(user);
-      return authRes;
+
+      // this.userSubject.next();
+
+
     }));
   }
 
   logout() {
     // remove user from local storage and set current user to null
-    // localStorage.removeItem('user');
+    localStorage.removeItem('user');
     this.userSubject.next(null);
+    this.isLoggedIn = false;
     this.router.navigate(['/account/login']);
   }
 
@@ -68,17 +75,19 @@ export class AccountService {
   //   return this.http.post(`${environment.apiUrl}/users/register`, user);
   // }
 
-  register(user: User) {
-    let email = user.email
-    let password = user.password
-    this.saveUser(user)
-    const authRes = this.http.post<AuthResponseData>(environment.SIGN_UP_URL + environment.AUTH_API_KEY, {email, password, returnSecureToken: true})
+  register(email:string, password:string) {
+
+    // this.saveUser(user)
+    return this.http.post<AuthResponseData>(environment.SIGN_UP_URL + environment.AUTH_API_KEY, {email, password, returnSecureToken: true})
     .pipe(
       tap((res) => {
         const { email, localId, idToken, expiresIn } = res;
 
         this.handleAuth(email, localId, idToken, +expiresIn);
-        return authRes
+
+
+
+
       })
     )
 

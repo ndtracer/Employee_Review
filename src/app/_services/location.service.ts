@@ -14,6 +14,7 @@ export class LocationService {
   public locationSubject: BehaviorSubject<Location | null>;
   public location: Observable<Location | null>;
 
+
   constructor(
     private router: Router,
     private http: HttpClient
@@ -28,7 +29,7 @@ export class LocationService {
 
   register(location: Location) {
     console.log(location)
-    return this.http.post(`${environment.apiUrl}/locations.json`, location)
+    return this.http.put(`${environment.apiUrl}/locations.json + ${environment.AUTH_API_KEY}`, location)
 
   }
 

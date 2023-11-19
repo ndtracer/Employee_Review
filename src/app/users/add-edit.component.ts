@@ -66,7 +66,7 @@ export class AddEditComponent implements OnInit {
     }
 
     this.submitting = true;
-    this.saveUser()
+    // this.saveUser()
 
 
       this.authObsv.subscribe({
@@ -81,10 +81,10 @@ export class AddEditComponent implements OnInit {
       })
   }
 
-  private saveUser() {
-    // create or update user based on id param
-    return this.id
-      ? this.accountService.update(this.id!, this.form.value)
-      : this.accountService.register(this.form.value);
-  }
+  // private saveUser() {
+  //   // create or update user based on id param
+  //   return this.id
+  //     ? this.accountService.update(this.id!, this.form.value)
+  //     : this.accountService.register(this.form.value);
+  // }
 }
