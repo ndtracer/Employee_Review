@@ -1,9 +1,20 @@
 export class User {
-  id?: string;
+  // id?: string;
   username?: string;
-  email?: string;
+  // email?: string;
   password?: string;
   firstName?: string;
   lastName?: string;
-  token?: string;
+
+  constructor (
+    public id: string,
+    public email: string,
+  private _token: string,
+  private _tokenExpDate: Date) {}
+
+  public get token() {
+    if (!this._tokenExpDate || new Date() > this._tokenExpDate) return null;
+
+    return this._token;
+  }
 }

@@ -7,6 +7,8 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Location } from '../_models';
 
+
+
 @Injectable({ providedIn: 'root' })
 export class LocationService {
   public locationSubject: BehaviorSubject<Location | null>;
@@ -25,7 +27,9 @@ export class LocationService {
   }
 
   register(location: Location) {
-    return this.http.post(`${environment.apiUrl}/locations`, location);
+    console.log(location)
+    return this.http.post(`${environment.apiUrl}/locations.json`, location)
+
   }
 
   getAll() {

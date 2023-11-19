@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-
-import { AccountService, AlertService } from '../_services';
+import { Observable } from 'rxjs'
+import { AccountService, AuthResponseData, AlertService } from '../_services';
 
 @Component({ templateUrl: 'add-edit.component.html' })
 export class AddEditComponent implements OnInit {
+  authObsv: Observable<AuthResponseData>;
   form!: FormGroup;
   id?: string;
   title!: string;
@@ -66,8 +67,9 @@ export class AddEditComponent implements OnInit {
 
     this.submitting = true;
     this.saveUser()
-      .pipe(first())
-      .subscribe({
+
+
+      this.authObsv.subscribe({
         next: () => {
           this.alertService.success('User saved', { keepAfterRouteChange: true });
           this.router.navigateByUrl('/users');

@@ -2,16 +2,18 @@ import { Injectable } from "@angular/core";
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from "rxjs";
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
 import { User } from '../_models';
 
 
 
-
-
-
+export interface AuthReqData {
+  email: string;
+  password: string;
+  returnSecureToken?: boolean;
+}
 
 export interface AuthResponseData {
   kind: string;
@@ -22,13 +24,14 @@ export interface AuthResponseData {
   localId: string;
   registered?: boolean;
 };
-// return this.http.post<AuthResponseData>()
+
 
 @Injectable({ providedIn: 'root' })
 
 export class AccountService {
   private userSubject: BehaviorSubject<User | null>;
   public user: Observable<User | null>;
+  private tokenExpTimer: any;
 
   constructor(
     private router: Router,
@@ -43,18 +46,20 @@ export class AccountService {
   }
 
   login(email: string, password: string) {
-    return this.http.post(`${environment.SIGN_IN_URL + environment.AUTH_API_KEY}`, { email, password, returnSecureToken: true})
-    .pipe(map(user => {
+    const authRes = this.http.post<AuthResponseData>(`${environment.SIGN_IN_URL + environment.AUTH_API_KEY}`, { email, password, returnSecureToken: true})
+    .pipe(tap((res) => {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
-      localStorage.setItem('user', JSON.stringify(user));
-      this.userSubject.next(user);
-      return user;
+      const { email, localId, idToken, expiresIn} = res;
+      this.handleAuth(email, localId, idToken, +expiresIn);
+      // localStorage.setItem('user', JSON.stringify(user));
+      // this.userSubject.next(user);
+      return authRes;
     }));
   }
 
   logout() {
     // remove user from local storage and set current user to null
-    localStorage.removeItem('user');
+    // localStorage.removeItem('user');
     this.userSubject.next(null);
     this.router.navigate(['/account/login']);
   }
@@ -66,8 +71,60 @@ export class AccountService {
   register(user: User) {
     let email = user.email
     let password = user.password
-    return this.http.post(environment.SIGN_UP_URL + environment.AUTH_API_KEY, {email, password, returnSecureToken: true})
+    this.saveUser(user)
+    const authRes = this.http.post<AuthResponseData>(environment.SIGN_UP_URL + environment.AUTH_API_KEY, {email, password, returnSecureToken: true})
+    .pipe(
+      tap((res) => {
+        const { email, localId, idToken, expiresIn } = res;
+
+        this.handleAuth(email, localId, idToken, +expiresIn);
+        return authRes
+      })
+    )
+
     // this.http.post(`${environment.apiUrl}/users/register`, user)
+  }
+
+  autoSignInFromLocalStorage() {
+    const userData = localStorage.getItem('userData');
+
+    if(!userData) return;
+
+    const lsUser: {
+      id: string;
+      email: string;
+      _token: string;
+      _tokenExpDate: string;
+    } = JSON.parse(userData);
+
+    const newUser = new User(
+      lsUser.id,
+      lsUser.email,
+      lsUser._token,
+      new Date(lsUser._tokenExpDate)
+    );
+
+    if (newUser.token) {
+      this.userSubject.next(newUser);
+
+      const expDuration =
+      new Date(lsUser._tokenExpDate).getTime() - new Date().getTime();
+      this.autoSignOut(expDuration);
+    }
+  }
+
+  autoSignOut(expDuration: number) {
+    this.tokenExpTimer = setTimeout(() => {
+      this.logout();
+    }, expDuration);
+  }
+
+
+
+
+
+  saveUser(user: User) {
+    return this.http.post(`${environment.apiUrl}/users/register.json`, user)
   }
 
   getAll() {
@@ -105,7 +162,25 @@ export class AccountService {
       return x;
     }));
   }
-}
+
+  private handleAuth(
+    email: string,
+    userId: string,
+    token: string,
+    expiresIn: number,
+    ) {
+      const expDate= new Date(new Date().getTime() + expiresIn * 1000);
+
+      console.log('expDate:', expDate);
+
+      const newUser = new User(userId, email, token, expDate);
+
+      this.userSubject.next(newUser);
+
+      this.autoSignOut(expiresIn *1000);
+
+      localStorage.setItem('userData', JSON.stringify(newUser))
+    }
 
 
-
+  }

@@ -3,10 +3,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { AccountService, AlertService } from '../_services';
+import { AccountService, AuthResponseData, AlertService } from '../_services';
+import { Observable } from 'rxjs';
 
 @Component({ templateUrl: 'register.component.html' })
 export class RegisterComponent implements OnInit {
+  authObsv: Observable<AuthResponseData>;
   form!: FormGroup;
   loading = false;
   submitted = false;
@@ -45,8 +47,8 @@ export class RegisterComponent implements OnInit {
 
     this.loading = true;
     this.accountService.register(this.form.value)
-    .pipe(first())
-    .subscribe({
+
+    this.authObsv.subscribe({
       next: () => {
         this.alertService.success('Registration successful', {keepAfterRouteChange: true});
         this.router.navigate(['../login'], { relativeTo: this.route });

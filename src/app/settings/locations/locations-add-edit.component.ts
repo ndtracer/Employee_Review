@@ -27,7 +27,7 @@ export class LocationsAddEditComponent implements OnInit {
       this.id = this.route.snapshot.params['id'];
 
 
-      console.log(this.id)
+
 
       // form with validation rules
       this.form = this.formBuilder.group({
@@ -49,7 +49,7 @@ export class LocationsAddEditComponent implements OnInit {
           this.form.patchValue(x);
           this.loading = false;
         });
-        console.log("this one", this.locationService.getById(this.id))
+
       }
   }
 
