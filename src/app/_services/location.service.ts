@@ -26,6 +26,7 @@ export class LocationService {
 
   public get locationValue() {
     return this.locationSubject.value;
+
   }
 
   register(location: Location) {
@@ -35,15 +36,35 @@ export class LocationService {
   }
 
   getAll() {
-    console.log(Location)
-    // return this.myLocation.slice()
-    return this.http.get<Location[]>(`${environment.apiUrl}/locations.json`)
-    .pipe(tap((location) => {
-      console.log(location)
 
-        console.log(location)
-    }));
+    // console.log(Location)
+    // // return this.myLocation.slice()
+    // let loca = this.http.get<any>(`${environment.apiUrl}/locations.json`)
+    // .pipe(tap(n => console.log(`tap: ${n}`)))
+    // console.log()
+
+    // loca.subscribe(n => console.log(`${n}`))
+    // console.log()
+
+    // return loca
+    return this.http.get<Location[]>((`${environment.apiUrl}/locations.json`))
+    .pipe(tap((x) => {
+      JSON.parse(JSON.stringify(x))
+    }))
+    // )))
+    // x) => {
+    //   console.log(JSON.parse(JSON.stringify(x)))
+
+
+
+    //     // console.log(JSON.parse('{"locationName: string}'))
+    //     console.log(x)
+    //     return x
+    // }));
   }
+
+
+
 
   getById(id: string) {
     return this.http.get<Location>(`${environment.apiUrl}/locations/${id}.json`);
@@ -69,4 +90,10 @@ export class LocationService {
       return x;
     }));
   }
+}
+
+
+function locationDetails(location: any) {
+  const { id, locationName } = location;
+  return { id, locationName };
 }

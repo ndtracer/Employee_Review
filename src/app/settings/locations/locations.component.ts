@@ -18,7 +18,7 @@ export class LocationsComponent implements OnInit {
 
   constructor( private locationService: LocationService) {
     this.location = this.locationService.locationValue;
-    console.log(this.location)
+
   }
 
   ngOnInit(): void {
