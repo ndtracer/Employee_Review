@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
-
+import { Location } from 'src/app/_models';
 import { LocationService } from 'src/app/_services/location.service';
 
 
@@ -14,8 +14,12 @@ import { LocationService } from 'src/app/_services/location.service';
 
 export class LocationsComponent implements OnInit {
   locations?: any[];
+  location: Location | null;
 
-  constructor( private locationService: LocationService) {}
+  constructor( private locationService: LocationService) {
+    this.location = this.locationService.locationValue;
+    console.log(this.location)
+  }
 
   ngOnInit(): void {
       this.locationService.getAll()

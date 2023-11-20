@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { AccountService } from './_services';
 import { User } from './_models';
@@ -10,13 +10,19 @@ export class AppComponent {
     isAuthenticated = false
 
     constructor(private accountService: AccountService) {
-        this.accountService.user.subscribe((user) => {
+        this.accountService.userSubject.subscribe((user) => {
           this.isAuthenticated = !!user});
 
 
     }
 
+    ngOnInit(): void {
+      this.accountService.autoSignInFromLocalStorage();
+    }
+
+
     logout() {
         this.accountService.logout();
+
     }
 }

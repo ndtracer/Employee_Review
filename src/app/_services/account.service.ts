@@ -30,7 +30,7 @@ export interface AuthResponseData {
 @Injectable({ providedIn: 'root' })
 
 export class AccountService {
-  public isLoggedIn: boolean;
+
    userSubject = new BehaviorSubject<User | null>(null);
   public user: Observable<User | null>;
   private tokenExpTimer: any;
@@ -41,7 +41,7 @@ export class AccountService {
     private router: Router,
     private http: HttpClient
   ) {
-    this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('user')!));
+    this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('userData')!));
     this.user = this.userSubject.asObservable();
 
   }
@@ -65,9 +65,9 @@ export class AccountService {
 
   logout() {
     // remove user from local storage and set current user to null
-    localStorage.removeItem('user');
+    localStorage.removeItem('userData');
     this.userSubject.next(null);
-    this.isLoggedIn = false;
+
     this.router.navigate(['/account/login']);
   }
 

@@ -27,19 +27,19 @@ export class DepartmentService {
 
   register(department: Department) {
 
-    return this.http.post(`${environment.apiUrl}/departments/register`, department);
+    return this.http.post(`${environment.apiUrl}/departments.json`, department);
   }
 
   getAll() {
-    return this.http.get<Department[]>(`${environment.apiUrl}/departments`);
+    return this.http.get<Department[]>(`${environment.apiUrl}/departments.json`);
   }
 
   getById(id: string) {
-    return this.http.get<Department>(`${environment.apiUrl}/departments/${id}`);
+    return this.http.get<Department>(`${environment.apiUrl}/departments/${id}json`);
   }
 
   update(id: string, params: any) {
-    return this.http.put(`${environment.apiUrl}/departments/${id}`, params)
+    return this.http.put(`${environment.apiUrl}/departments/${id}.json`, params)
     .pipe(map(x => {
         // update local storage
         const department = { ...this.departmentValue, ...params };
@@ -53,7 +53,7 @@ export class DepartmentService {
 
   delete(id: string) {
     return this.http.delete
-    (`${environment.apiUrl}/departments/${id}`)
+    (`${environment.apiUrl}/departments/${id}.json`)
     .pipe(map(x => {
       return x;
     }));

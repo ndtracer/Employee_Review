@@ -25,19 +25,19 @@ export class EmployeeService {
   }
 
   register(employee: Employee) {
-    return this.http.post(`${environment.apiUrl}/employees`, employee);
+    return this.http.post(`${environment.apiUrl}/employees.json`, employee);
   }
 
   getAll() {
-    return this.http.get<Employee[]>(`${environment.apiUrl}/employees`);
+    return this.http.get<Employee[]>(`${environment.apiUrl}/employees.json`);
   }
 
   getById(id: string) {
-    return this.http.get<Employee>(`${environment.apiUrl}/employees/${id}`);
+    return this.http.get<Employee>(`${environment.apiUrl}/employees/${id}.json`);
   }
 
   update(id: string, params: any) {
-    return this.http.put(`${environment.apiUrl}/employees/${id}`, params)
+    return this.http.put(`${environment.apiUrl}/employees/${id}.json`, params)
     .pipe(map(x => {
         // update local storage
         const employee = { ...this.employeeValue, ...params };
@@ -51,7 +51,7 @@ export class EmployeeService {
 
   delete(id: string) {
     return this.http.delete
-    (`${environment.apiUrl}/employees/${id}`)
+    (`${environment.apiUrl}/employees/${id}.json`)
     .pipe(map(x => {
 
       return x;

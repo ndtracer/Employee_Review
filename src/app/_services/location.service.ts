@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from "rxjs";
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
 import { Location } from '../_models';
@@ -13,6 +13,7 @@ import { Location } from '../_models';
 export class LocationService {
   public locationSubject: BehaviorSubject<Location | null>;
   public location: Observable<Location | null>;
+  private myLocation: Location[] = [];
 
 
   constructor(
@@ -28,21 +29,28 @@ export class LocationService {
   }
 
   register(location: Location) {
-    console.log(location)
-    return this.http.put(`${environment.apiUrl}/locations.json + ${environment.AUTH_API_KEY}`, location)
+
+    return this.http.post(`${environment.apiUrl}/locations.json`, location)
 
   }
 
   getAll() {
-    return this.http.get<Location[]>(`${environment.apiUrl}/locations`);
+    console.log(Location)
+    // return this.myLocation.slice()
+    return this.http.get<Location[]>(`${environment.apiUrl}/locations.json`)
+    .pipe(tap((location) => {
+      console.log(location)
+
+        console.log(location)
+    }));
   }
 
   getById(id: string) {
-    return this.http.get<Location>(`${environment.apiUrl}/locations/${id}`);
+    return this.http.get<Location>(`${environment.apiUrl}/locations/${id}.json`);
   }
 
   update(id: string, params: any) {
-    return this.http.put(`${environment.apiUrl}/locations/${id}`, params)
+    return this.http.patch(`${environment.apiUrl}/locations/${id}.json`, params)
     .pipe(map(x => {
         // update local storage
         const location = { ...this.locationValue, ...params };
@@ -56,7 +64,7 @@ export class LocationService {
 
   delete(id: string) {
     return this.http.delete
-    (`${environment.apiUrl}/locations/${id}`)
+    (`${environment.apiUrl}/locations/${id}.json`)
     .pipe(map(x => {
       return x;
     }));

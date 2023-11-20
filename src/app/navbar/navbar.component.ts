@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { AccountService } from '../_services';
 import { User } from '../_models';
@@ -13,10 +13,16 @@ export class NavbarComponent {
   user?: User | null;
   isAuthenticated = false
 
-  constructor(private accountService: AccountService) {
-      this.accountService.user.subscribe((user) => {
+  constructor(private accountService: AccountService) {}
+
+  ngOnInit(): void {
+      this.accountService.userSubject.subscribe((user) => {
         this.isAuthenticated = !!user});
-  }
+      }
+
+    ngOnDestroy(): void {
+        this.accountService.userSubject.unsubscribe()
+      }
 
   logout() {
     this.accountService.logout();
